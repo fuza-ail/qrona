@@ -6,18 +6,20 @@ const {queryInterface} = sequelize;
 describe('User auth test',()=>{
   const userData ={
     no_ktp : '12345678',
-    user_name: 'males',
+    name: 'males',
     phone: '0122233333',
     email: 'males@mail.com',
     password: 'rahasia',
+    address: 'jln lontong'
   }
 
   const userData2 ={
     no_ktp : '87654321',
-    user_name: 'dudin',
+    name: 'dudin',
     phone: '0122233333',
     email: 'dudin@mail.com',
     password: 'rahasia',
+    address: 'jalan lontong'
   }
 
   const userLogin={
@@ -58,7 +60,7 @@ describe('User auth test',()=>{
 
   describe('POST /login - login user',()=>{
     beforeAll(done=>{
-      User.create(userLogin)
+      User.create(userData)
         .then(()=> done())
         .catch(error => done(error))
     })

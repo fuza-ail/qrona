@@ -5,18 +5,98 @@
 ---
 ##### POST /login --> test done
 ###### login
+- Request body:
+```
+{
+	"email": <email>,
+	"password": <password>
+}
+```
+
+- Response (200):
+```
+{
+  "access_token": <access_token>
+}
+```
 
 ##### POST /register --> test done
 ###### register
+- Request body:
+```
+{
+	"no_ktp": <no_ktp>,
+	"name":<name>,
+	"email":<email>,
+	"address":<address>,
+	"phone": <phone>,
+	"password": <password>
+}
+```
+
+- Response (201):
+```
+{
+  "access_token": <access_token>
+}
+```
 
 ##### GET /user --> test done
-###### get user detail 
+###### get user detail
+- Response(200):
+```
+{
+  "no_ktp": <no_ktp>,
+  "name": <name>,
+  "email": <email>,
+  "address": <address>,
+  "status": <status>,
+  "phone": <phone>
+}
+``` 
 
 ##### PUT /user --> test done
 ###### edit user detail
+- Request body:
+```
+{
+	"name": <name>,
+	"address": <address>,
+	"phone": <phone>
+}
+```
+
+- Response (200):
+```
+{
+    "message": "profile has been updated"
+}
+```
 
 ##### POST /hotplace --> test done
 ###### create hotplace and generate barcode
+- Request body:
+```
+{
+	"name": "gojek amir",
+	"address": "jalan asik",
+	"type": "transport",
+	"phone": "0812393",
+  "barcode_url": "url gambar si barcode"
+}
+```
+
+- Response (200):
+```
+{
+  "id": 86,
+  "name": "gojek amir",
+  "barcode_url": "url gambar si barcode",
+  "HotplaceId": 86,
+  "updatedAt": "2020-05-31T21:19:32.169Z",
+  "createdAt": "2020-05-31T21:19:32.169Z"
+}
+```
 
 ##### GET /hotplace --> test done
 ###### get user hotplaces

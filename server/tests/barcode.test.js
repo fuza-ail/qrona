@@ -13,7 +13,7 @@ describe('Barcode test', () => {
 
   const userData = {
     no_ktp: '12345678',
-    user_name: 'males',
+    name: 'males',
     phone: '0122233333',
     email: 'males@mail.com',
     password: 'rahasia',
@@ -25,8 +25,9 @@ describe('Barcode test', () => {
   const hotPlace = {
     name: 'toko kita',
     type: 'store',
-    location: 'taman mini, jakarta',
+    address: 'taman mini, jakarta',
     phone: '081111111',
+    barcode_url: 'google.com',
     UserId: userId
   }
 

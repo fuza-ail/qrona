@@ -73,9 +73,13 @@ describe('User detail test', () => {
 
     test('200 succes update data', (done) => {
       request(app)
-        .post('/user')
+        .put('/user')
         .set('access_token', userToken)
-        .send({ user_name: 'editedname' })
+        .send({ 
+          name: 'editedname',
+          address: 'jalan leuwipanjang',
+          phone: '081236481'
+        })
         .then(response => {
           const { body, status } = response;
           expect(status).toBe(200);
