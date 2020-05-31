@@ -3,47 +3,58 @@
 
 #### Mobile app
 ---
-##### POST /login
+##### POST /login --> test done
 ###### login
-##### POST /register
+
+##### POST /register --> test done
 ###### register
-##### GET /location
-###### get user location from gps
-##### GET /user
-###### get user detail
-##### PUT /user
+
+##### GET /user --> test done
+###### get user detail 
+
+##### PUT /user --> test done
 ###### edit user detail
-##### POST /checkin
-###### scan barcode to check in
-##### PUT /checkout
-###### scan barcode to check out
-##### POST /hotplace
+
+##### POST /hotplace --> test done
 ###### create hotplace and generate barcode
-##### GET /hotplace
+
+##### GET /hotplace --> test done
 ###### get user hotplaces
-##### GET /hotplace/:id
+
+##### GET /hotplace/:id --> test done
 ###### get qr of the hotplace
-##### PUT /hotplace/:id
-###### edit hotplace data
-##### DELETE /hotplace/:id
+
+##### DELETE /hotplace/:id --> test done
 ###### delete hotplace detail
-##### GET /download
+
+##### GET /download/:id --> test done
 ###### download the qr
-##### GET /map
-###### fething map
+
+##### POST /checkin --> test done
+###### scan barcode to check in
+
+##### PUT /checkout -- test done
+###### scan barcode to check out
+
 
 #### Web app
 ---
-##### POST /loginadmin
-###### logi as admin
-##### GET /users
+##### POST /loginadmin --> test done
+###### login as admin
+
+##### GET /users --> test done
 ###### get all user data
-##### GET /users/:id
+
+##### GET /users/:id --> test done
 ###### get user by id
-##### GET /reghotplace
+
+##### PUT /users/:id --> test done
+###### update status user
+
+##### GET /reghotplace --> test done
 ###### get all hotplace data
-##### GET /reghotplace/:id
+
+##### GET /reghotplace/:id --> test done
 ###### get hotplace by id
-##### PUT users/:id
-###### edit hotplace by id
-*/
+
+
