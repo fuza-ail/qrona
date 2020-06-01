@@ -7,18 +7,21 @@ import {
   TouchableOpacity,
 } from "react-native";
 
-export default function CheckIn() {
+export default function QrHotplace() {
+  const name = "Mini Market Asyik";
   return (
     <View style={styles.container}>
       <ScrollView contentContainerStyle={{ alignItems: "center", width: 375 }}>
-        <Text style={styles.screenTitle}>Check In</Text>
-        <View style={styles.checkin_box}>
-          <View style={styles.camera}></View>
-          <Text style={styles.info}>Scan Hot Place QR you Visit Here</Text>
+        <Text style={styles.screenTitle}>{name}</Text>
+        <View style={styles.qr_box}>
+          <View style={styles.qr_code}></View>
+          <Text style={styles.info}>
+            Print and Put this QR on visible place
+          </Text>
         </View>
       </ScrollView>
       <TouchableOpacity style={styles.btn}>
-        <Text style={styles.btn_text}>Scan</Text>
+        <Text style={styles.btn_text}>Download QR Code</Text>
       </TouchableOpacity>
     </View>
   );
@@ -36,7 +39,7 @@ const styles = StyleSheet.create({
     color: "#00B979",
     marginTop: 60,
   },
-  checkin_box: {
+  qr_box: {
     backgroundColor: "#B3EFDD",
     alignItems: "center",
     width: 340,
@@ -44,7 +47,7 @@ const styles = StyleSheet.create({
     borderRadius: 5,
     marginVertical: 25,
   },
-  camera: {
+  qr_code: {
     backgroundColor: "#fff",
     width: 310,
     height: 300,

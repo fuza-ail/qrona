@@ -7,22 +7,34 @@ import Home from "./screens/Home";
 import Map from "./screens/Map";
 import Profile from "./screens/Profile";
 import HotPlace from "./screens/HotPlace";
-// import CheckIn from "./screens/CheckIn";
+import Login from "./screens/Login";
+import Register from "./screens/Register";
+import AddHotPlace from "./screens/AddHotPlace";
+import CheckIn from "./screens/CheckIn";
+import QrHotplace from "./screens/QrHotplace";
+import Protocol from "./screens/Protocol";
 
 const Tab = createBottomTabNavigator();
 // const Stack = createStackNavigator();
 
 export default function App() {
   return (
-    <NavigationContainer>
-      <Tab.Navigator>
-        <Tab.Screen name="Home" component={Home} />
-        <Tab.Screen name="Profile" component={Profile} />
-        {/* <Tab.Screen name="Check In" component={CheckIn} /> */}
-        <Tab.Screen name="Hot Place" component={HotPlace} />
-        <Tab.Screen name="Map" component={Map} />
-      </Tab.Navigator>
-    </NavigationContainer>
+    <>
+      {/* <Login /> */}
+      {/* <Register /> */}
+      {/* <AddHotPlace /> */}
+      {/* <CheckIn /> */}
+      {/* <QrHotplace /> */}
+      {/* <Protocol /> */}
+      <NavigationContainer>
+        <Tab.Navigator>
+          <Tab.Screen name="Home" component={Home} />
+          <Tab.Screen name="Profile" component={Profile} />
+          <Tab.Screen name="Hot Place" component={HotPlace} />
+          <Tab.Screen name="Map" component={Map} />
+        </Tab.Navigator>
+      </NavigationContainer>
+    </>
   );
 }
 
