@@ -174,7 +174,7 @@
 }
 ```
 
-##### PUT /checkout -- test done
+##### PUT /checkout/:id -- test done
 ###### scan barcode to check out
 - Response (200):
 ```
