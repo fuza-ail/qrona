@@ -236,6 +236,7 @@
 
 ##### GET /users/:id --> test done
 ###### get user by id
+- Response (200):
 ```
 {
   "no_ktp": "23423423",
