@@ -266,10 +266,56 @@
 ##### PUT /users/:id --> test done
 ###### update status user
 
+
 ##### GET /reghotplace --> test done
 ###### get all hotplace data
+- Response (200):
+```
+[
+  {
+    "id": 438,
+    "name": "gojek amir",
+    "type": "transport",
+    "address": "jalan asik",
+    "phone": "0812393",
+    "User": {
+        "id": 1233,
+        "name": "ail",
+        "email": "ail@mail.com",
+        "address": "jln durean",
+        "phone": "081231412"
+    }
+  }
+]
+```
 
 ##### GET /reghotplace/:id --> test done
 ###### get hotplace by id
+```
+{
+  "id": 438,
+  "name": "gojek amir",
+  "type": "transport",
+  "address": "jalan asik",
+  "phone": "0812393",
+  "Barcode": {
+      "name": "gojek amir",
+      "barcode_url": "url gambar si barcode",
+      "UserBarcodes": [
+          {
+              "checkin": "2020-06-01T16:13:37.482Z",
+              "checkout": "2020-06-01T16:13:37.482Z",
+              "User": {
+                  "name": "ail",
+                  "email": "ail@mail.com",
+                  "address": "jln durean",
+                  "phone": "081231412",
+                  "no_ktp": "23423423"
+              }
+          }
+      ]
+  }
+}
+```
 
 
