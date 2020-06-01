@@ -193,12 +193,75 @@
 ---
 ##### POST /loginadmin --> test done
 ###### login as admin
+- Request body:
+```
+{
+	"email": <email>,
+	"password": <password>
+}
+```
+
+- Response (200):
+```
+{
+  "access_token": <access_token>
+}
+```
 
 ##### GET /users --> test done
 ###### get all user data
+- Response (200):
+```
+[
+  {
+    "id": 1093,
+    "no_ktp": "12345678",
+    "name": "asdf",
+    "email": "asdf@mail.com",
+    "address": "jakarta",
+    "status": "negatif",
+    "phone": "0122233333"
+  },
+  {
+    "id": 1094,
+    "no_ktp": "12345672348",
+    "name": "asddddf",
+    "email": "asssdf@mail.com",
+    "address": "jakarta",
+    "status": "negatif",
+    "phone": "012223335533"
+  }
+]
+```
 
 ##### GET /users/:id --> test done
 ###### get user by id
+```
+{
+  "no_ktp": "23423423",
+  "name": "ail",
+  "email": "ail@mail.com",
+  "address": "jln durean",
+  "status": "negatif",
+  "phone": "081231412",
+  "UserBarcodes": [
+      {
+          "checkin": "2020-06-01T16:13:37.482Z",
+          "checkout": "2020-06-01T16:13:37.482Z",
+          "Barcode": {
+              "name": "gojek amir",
+              "barcode_url": "url gambar si barcode",
+              "Hotplace": {
+                  "name": "gojek amir",
+                  "type": "transport",
+                  "address": "jalan asik",
+                  "phone": "0812393"
+              }
+          }
+      }
+  ]
+}
+```
 
 ##### PUT /users/:id --> test done
 ###### update status user

@@ -49,8 +49,7 @@ module.exports = (sequelize, DataTypes) => {
     sequelize,
     hooks: {
       beforeCreate: (user,action)=>{
-        user.status = 'normal'
-        user.type = 'regular'
+        user.status = 'negatif'
         user.password = hashPassword(user.password)
       }
     }
@@ -58,6 +57,9 @@ module.exports = (sequelize, DataTypes) => {
 
   User.associate = function(models) {
     // associations can be defined here
+    User.hasMany(models.Hotplace)
+    User.hasMany(models.UserBarcode)
+    User.belongsToMany(models.Barcode, {through:models.UserBarcode,foreignKey: 'UserId'})
   };
   return User;
 };

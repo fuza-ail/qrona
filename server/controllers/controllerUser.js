@@ -2,7 +2,7 @@ const { User, Hotplace, Barcode, UserBarcode } = require('../models')
 const jwt = require('jsonwebtoken')
 const { checkPassword } = require('../helpers/bcrypt');
 require('dotenv').config();
-const { Op } = require('sequelize')
+const { Op } = require('sequelize');
 
 
 class ControllerUser {

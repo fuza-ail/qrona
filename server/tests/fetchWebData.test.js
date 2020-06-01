@@ -22,22 +22,22 @@ describe('Fetch data test', () => {
   }
 
   const adminLogin = {
-    email: 'males@mail.com',
+    email: 'admin@mail.com',
     password: 'rahasia'
   }
 
   const userOne = {
     no_ktp: '12345678232123',
-    user_name: 'admin',
-    email: 'admin@mail.com',
+    user_name: 'usertwo',
+    email: 'userone@mail.com',
     password: 'rahasia',
     phone: '0122233333',
   }
 
   const userTwo = {
     no_ktp: '12345678123312',
-    user_name: 'admin',
-    email: 'admin@mail.com',
+    user_name: 'usertwo',
+    email: 'usertwo@mail.com',
     password: 'rahasia',
     phone: '0122233333',
   }
@@ -47,8 +47,8 @@ describe('Fetch data test', () => {
       User.create(adminData)
         .then(admin => {
           adminToken = jwt.sign({
-            adminId: admin.id,
-            adminEmail: admin.email
+            userId: admin.id,
+            userEmail: admin.email
           }, process.env.TOKEN_KEY)
           return User.create(userOne)
         })
@@ -58,40 +58,13 @@ describe('Fetch data test', () => {
         })
         .then(newUser => {
           userDua = newUser
-          return Hotplace.create({
-            name: 'ojek',
-            type: 'transport',
-            location: 'jalan durian,jakarata',
-            phone: '082398123',
-            UserId: newUser.id
-          })
+          done()
         })
-        .then(hotplace=>{
-          hotplaceSatu = hotplace
-          return Barcode.create({
-            name:hotplace.name,
-            barcode_url: 'google.com',
-            HotplaceId: hotplace.id
-          })
-        })
-        .then(barcode=>{
-          barcodeSatu = barcode
-          return UserBarcode.create({
-            checkin:Date.now(),
-            checkout: Date.now(),
-            BarcodeId: barcodeSatu.id,
-            UserId: userSatu.id
-          })
-        })
-        .then(()=>done())
         .catch(error => done(error))
     })
     afterAll(done => {
       queryInterface
         .bulkDelete('Users', {})
-        .then(() => queryInterface.bulkDelete('Hotplaces', {}))
-        .then(() => queryInterface.bulkDelete('Barcodes', {}))
-        .then(() => queryInterface.bulkDelete('UserBarcodes', {}))
         .then(() => done())
         .catch(error => done(error))
     })
@@ -113,8 +86,8 @@ describe('Fetch data test', () => {
       User.create(adminData)
         .then(admin => {
           adminToken = jwt.sign({
-            adminId: admin.id,
-            adminEmail: admin.email
+            userId: admin.id,
+            userEmail: admin.email
           }, process.env.TOKEN_KEY)
           return User.create(userOne)
         })
@@ -179,8 +152,8 @@ describe('Fetch data test', () => {
       User.create(adminData)
         .then(admin => {
           adminToken = jwt.sign({
-            adminId: admin.id,
-            adminEmail: admin.email
+            userId: admin.id,
+            userEmail: admin.email
           }, process.env.TOKEN_KEY)
           return User.create(userOne)
         })
@@ -245,8 +218,8 @@ describe('Fetch data test', () => {
       User.create(adminData)
         .then(admin => {
           adminToken = jwt.sign({
-            adminId: admin.id,
-            adminEmail: admin.email
+            userId: admin.id,
+            userEmail: admin.email
           }, process.env.TOKEN_KEY)
           return User.create(userOne)
         })
@@ -311,8 +284,8 @@ describe('Fetch data test', () => {
       User.create(adminData)
         .then(admin => {
           adminToken = jwt.sign({
-            adminId: admin.id,
-            adminEmail: admin.email
+            userId: admin.id,
+            userEmail: admin.email
           }, process.env.TOKEN_KEY)
           return User.create(userOne)
         })

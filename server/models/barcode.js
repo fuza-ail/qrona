@@ -12,6 +12,9 @@ module.exports = (sequelize, DataTypes) => {
 
   Barcode.associate = function(models) {
     // associations can be defined here
+    Barcode.belongsTo(models.Hotplace,{foreignKey:'HotplaceId'})
+    Barcode.belongsToMany(models.User,{through:models.UserBarcode,foreignKey:'BarcodeId'})
+    Barcode.hasMany(models.UserBarcode)
   };
   return Barcode;
 };

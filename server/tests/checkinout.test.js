@@ -125,7 +125,7 @@ describe('User checkin and out test', () => {
         .bulkDelete('Users', {})
         .then(() => queryInterface.bulkDelete('Hotplaces', {}))
         .then(() => queryInterface.bulkDelete('Barcodes',{}))
-        .then(()=> queryInterface.bulkDelete('UserBarcode',{}))
+        .then(()=> queryInterface.bulkDelete('UserBarcodes',{}))
         .then(() => done())
         .catch(error => done(error))
     })

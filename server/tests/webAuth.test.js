@@ -3,25 +3,29 @@ const { User, Hotplace, Barcode, UserBarcode, sequelize } = require('../models')
 const request = require('supertest');
 const {queryInterface} = sequelize;
 
+
 describe('Admin auth test',()=>{
   const adminData ={
     no_ktp : '12345678',
-    user_name: 'admin',
+    name: 'admin',
     email: 'admin@mail.com',
     password: 'rahasia',
     phone: '0122233333',
-    type: 'admin'
+    type: 'admin',
+    address: 'jakarta'
   }
 
   const adminLogin={
-    email: 'males@mail.com',
+    email: 'admin@mail.com',
     password: 'rahasia'
   }
 
   describe('POST /loginadmin - login admin',()=>{
     beforeAll(done=>{
       User.create(adminData)
-        .then(()=> done())
+        .then(admin=> {
+          done()
+        })
         .catch(error => done(error))
     })
     afterAll(done=>{
