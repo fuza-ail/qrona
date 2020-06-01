@@ -85,16 +85,23 @@ class ControllerAdmin {
     const suspectHotplaces =[]
     const sameHotplaceUser = []
     const contactedUser = []
-
-    User.findByPk(userId)
+    if(inputData.status == 'positif'){
+      User.findByPk(userId)
       .then(user => {
-        return User.update({
-          status: inputData.status
-        }, {
-          where: { id: user.id }
-        })
+        if(user){
+          return User.update({
+            status: inputData.status
+          }, {
+            where: { id: user.id }
+          })
+        }else{
+          throw {
+            status: 404,
+            message: 'user not found'
+          }
+        }
       })
-      .then(() => {
+      .then(data => {
         return User.findByPk(userId, {
           attributes: ['id', 'no_ktp', 'name'],
           include: {
@@ -165,7 +172,10 @@ class ControllerAdmin {
               status: 'OTG'
             },{
               where:{
-                id: el
+                [Op.and]:[
+                  {id: el},
+                  {status: 'negatif'}
+                ]
               }
             })
           )
@@ -179,6 +189,21 @@ class ControllerAdmin {
         })
       })
       .catch(error => next(error))
+    }else{
+      User.findByPk(userId)
+      .then(user=>{
+        User.update({
+          status: inputData.status
+        },{
+          where:{id: user.id}
+        })
+      })
+      .then(data=>{
+        res.status(200).json({
+          message: 'status has been updated'
+        })
+      })
+    }
   }
 
   static getHotplaces(req, res, next) {
