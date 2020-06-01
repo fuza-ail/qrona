@@ -266,6 +266,17 @@
 
 ##### PUT /users/:id --> test done
 ###### update status user
+- Request body:
+```
+  "status": <status>
+```
+
+- Response (200):
+```
+{
+  "message": "all user has been updated"
+}
+```
 
 
 ##### GET /reghotplace --> test done
