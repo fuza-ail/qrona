@@ -100,22 +100,94 @@
 
 ##### GET /hotplace --> test done
 ###### get user hotplaces
+- Response (200):
+```
+[
+  {
+      "id": 128,
+      "name": "gojek amir",
+      "type": "transport",
+      "address": "jalan asik",
+      "phone": "0812393"
+  },
+  {
+      "id": 129,
+      "name": "gojek amir",
+      "type": "transport",
+      "address": "jalan asik",
+      "phone": "0812393"
+  }
+]
+```
+
 
 ##### GET /hotplace/:id --> test done
 ###### get qr of the hotplace
+- Response(200):
+```
+{
+  "id": 128,
+  "name": "gojek amir",
+  "barcode_url": "url gambar si barcode",
+  "HotplaceId": 128,
+  "createdAt": "2020-06-01T11:29:58.231Z",
+  "updatedAt": "2020-06-01T11:29:58.231Z"
+}
+```
 
 ##### DELETE /hotplace/:id --> test done
 ###### delete hotplace detail
+- Response (200):
+```
+{
+  "message": "hotplace has been deleted"
+}
+```
 
 ##### GET /download/:id --> test done
 ###### download the qr
+- Response (200):
+```
+{
+  "id": 157,
+  "name": "gojek amir",
+  "barcode_url": "url gambar si barcode",
+  "HotplaceId": 157,
+  "createdAt": "2020-06-01T11:53:38.934Z",
+  "updatedAt": "2020-06-01T11:53:38.934Z"
+}
+```
+
 
 ##### POST /checkin --> test done
 ###### scan barcode to check in
+- Response (201):
+```
+{
+  "id": 1,
+  "checkin": "2020-06-01T12:19:00.644Z",
+  "checkout": "2020-06-01T12:19:00.644Z",
+  "BarcodeId": 175,
+  "UserId": 514,
+  "updatedAt": "2020-06-01T12:19:00.646Z",
+  "createdAt": "2020-06-01T12:19:00.646Z"
+}
+```
 
 ##### PUT /checkout -- test done
 ###### scan barcode to check out
-
+- Response (200):
+```
+{
+  "id": 1,
+  "checkin": "2020-06-01T12:19:00.644Z",
+  "checkout": "2020-06-01T12:25:09.685Z",
+  "BarcodeId": 175,
+  "UserId": 514,
+  "createdAt": "2020-06-01T12:19:00.646Z",
+  "updatedAt": "2020-06-01T12:25:09.686Z"
+}
+```
 
 #### Web app
 ---

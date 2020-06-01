@@ -10,6 +10,7 @@ describe('User checkin and out test', () => {
   let userId;
   let userHotPlace;
   let hotplaceBarcode;
+  let userBarcode;
 
   const userData = {
     no_ktp: '12345678',
@@ -71,8 +72,8 @@ describe('User checkin and out test', () => {
         .post('/checkin')
         .set('access_token', userToken)
         .send({
-          checkin: Date.now(),
-          checkout: Date.now(),
+          checkin: new Date(),
+          checkout: new Date(),
           BarcodeId: hotplaceBarcode.id,
           UserId: userId
         })
@@ -84,7 +85,7 @@ describe('User checkin and out test', () => {
     })
   })
 
-  describe('PUT /checkout - checkout user', () => {
+  describe('PUT /checkout/:id - checkout user', () => {
     beforeAll(done => {
       User.create(userData)
         .then(user => {
@@ -105,6 +106,16 @@ describe('User checkin and out test', () => {
         })
         .then(barcode => {
           hotplaceBarcode = barcode
+          return UserBarcode.create({
+            checkin: new Date(),
+            checkout: new Date(),
+            BarcodeId: barcode.id,
+            UserId: userId
+          })
+        })
+        .then(barcodeData=>{
+          userBarcode = barcodeData
+          console.log(userBarcode)
           done()
         })
         .catch(error => done(error))
@@ -121,10 +132,10 @@ describe('User checkin and out test', () => {
 
     test('200 success checkout', (done) => {
       request(app)
-        .update('/checkout')
+        .put('/checkout/'+hotplaceBarcode.id)
         .set('access_token', userToken)
         .send({
-          checkout: Date.now(),
+          checkin: new Date()
         })
         .then(response => {
           const { body, status } = response;
