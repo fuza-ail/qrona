@@ -23,7 +23,7 @@ export default function Register({ navigation }) {
   return (
     <KeyboardAvoidingView style={styles.container} behavior="padding">
       <ScrollView contentContainerStyle={{ alignItems: "center", width: 375 }}>
-        <Text style={styles.screenTitle}>Add Hot Place</Text>
+        <Text style={styles.screenTitle}>Add Crowd Point</Text>
         <TextInput
           style={styles.input}
           onChangeText={(text) => setName(text)}

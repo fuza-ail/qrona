@@ -7,12 +7,12 @@ import {
   TouchableOpacity,
 } from "react-native";
 
-export default function QrHotplace() {
-  const name = "Mini Market Asyik";
+export default function QrHotplace({ navigation, route }) {
+  const { place } = route.params;
   return (
     <View style={styles.container}>
       <ScrollView contentContainerStyle={{ alignItems: "center", width: 375 }}>
-        <Text style={styles.screenTitle}>{name}</Text>
+        <Text style={styles.screenTitle}>{place.name}</Text>
         <View style={styles.qr_box}>
           <View style={styles.qr_code}></View>
           <Text style={styles.info}>

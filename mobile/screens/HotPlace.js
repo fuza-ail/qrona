@@ -26,6 +26,10 @@ export default function HotPlace({ navigation }) {
     },
   ];
 
+  function toQrHotplace(place) {
+    navigation.navigate("QR Hotplace", { place });
+  }
+
   function toAddPlace() {
     navigation.navigate("Add Hotplace");
   }
@@ -33,11 +37,11 @@ export default function HotPlace({ navigation }) {
   return (
     <View style={styles.container}>
       <ScrollView contentContainerStyle={{ alignItems: "center", width: 375 }}>
-        <Text style={styles.screenTitle}>My Hot Place</Text>
-        <Place places={places} />
+        <Text style={styles.screenTitle}>My Crowd Point</Text>
+        <Place toQrHotplace={(place) => toQrHotplace(place)} places={places} />
       </ScrollView>
       <TouchableOpacity onPress={toAddPlace} style={styles.btn}>
-        <Text style={styles.btn_text}>Add Hot Place</Text>
+        <Text style={styles.btn_text}>Add Crowd Point</Text>
       </TouchableOpacity>
     </View>
   );

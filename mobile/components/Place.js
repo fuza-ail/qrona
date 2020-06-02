@@ -1,16 +1,12 @@
 import React from "react";
 import { StyleSheet, View, Text, TouchableOpacity } from "react-native";
 
-export default function Place(props, { navigation }) {
-  function toQrHotplace() {
-    // navigation.navigate("QR Hotplace");
-  }
-
+export default function Place(props) {
   return (
     <View style={styles.container}>
       {props.places.map((place) => (
         <TouchableOpacity
-          onPress={toQrHotplace}
+          onPress={() => props.toQrHotplace(place)}
           style={styles.place_box}
           key={place.id}
         >
