@@ -73,6 +73,10 @@ export default function Home({ navigation }) {
     navigation.navigate("Check In");
   }
 
+  function toCheckOut() {
+    navigation.navigate("Check Out");
+  }
+
   function toAddHotplace() {
     navigation.navigate("Add Hotplace");
   }
@@ -97,7 +101,7 @@ export default function Home({ navigation }) {
             Lakukan Check in setiap kali anda memasuki Hot Place
           </Text>
         </TouchableOpacity>
-        <TouchableOpacity onPress={toCheckIn} style={styles.menu_box}>
+        <TouchableOpacity onPress={toCheckOut} style={styles.menu_box}>
           <Text style={styles.box_title}>Check Out</Text>
           <Text style={styles.box_desc}>
             Lakukan Check Out setiap kali anda keluar dari Hot Place

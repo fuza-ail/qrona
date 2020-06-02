@@ -11,6 +11,7 @@ import HotPlace from "./screens/HotPlace";
 import Login from "./screens/Login";
 import Register from "./screens/Register";
 import CheckIn from "./screens/CheckIn";
+import CheckOut from "./screens/CheckOut";
 import AddHotPlace from "./screens/AddHotPlace";
 import QrHotplace from "./screens/QrHotplace";
 import Protocol from "./screens/Protocol";
@@ -28,6 +29,7 @@ function HomeStack() {
     >
       <Stack.Screen name="Home" component={Home} />
       <Stack.Screen name="Check In" component={CheckIn} />
+      <Stack.Screen name="Check Out" component={CheckOut} />
       <Stack.Screen name="Add Hotplace" component={AddHotPlace} />
       <Stack.Screen name="Protocol" component={Protocol} />
     </Stack.Navigator>
