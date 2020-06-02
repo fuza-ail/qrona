@@ -9,7 +9,7 @@ import {
   KeyboardAvoidingView,
 } from "react-native";
 
-export default function Register() {
+export default function Register({ navigation }) {
   const [name, setName] = useState("");
   const [no_ktp, setNo_ktp] = useState("");
   const [phone, setPhone] = useState("");
@@ -19,6 +19,7 @@ export default function Register() {
 
   function register() {
     // DISPATCH TO REGISTER
+    navigation.navigate("Login");
   }
 
   return (
@@ -87,7 +88,10 @@ export default function Register() {
         <TouchableOpacity onPress={register} style={styles.btn}>
           <Text style={styles.btn_text}>Register</Text>
         </TouchableOpacity>
-        <TouchableOpacity style={styles.btn_off}>
+        <TouchableOpacity
+          onPress={() => navigation.goBack()}
+          style={styles.btn_off}
+        >
           <Text style={styles.btn_text}>Cancel</Text>
         </TouchableOpacity>
       </ScrollView>

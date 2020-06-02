@@ -51,42 +51,55 @@ function HotPlaceStack() {
   );
 }
 
+function TabScreen() {
+  return (
+    <Tab.Navigator
+      screenOptions={({ route }) => ({
+        tabBarColor: "#B3EFDD",
+        tabBarIcon: ({ focused, color, size }) => {
+          let iconName;
+
+          if (route.name === "Home") {
+            iconName = focused ? "home" : "home";
+          } else if (route.name === "Profile") {
+            iconName = focused ? "user" : "user";
+          } else if (route.name === "Hot Place") {
+            iconName = focused ? "map-marker" : "map-marker";
+          } else if (route.name === "Map") {
+            iconName = focused ? "map" : "map";
+          }
+
+          // You can return any component that you like here!
+          return <Icon name={iconName} size={size} color={color} />;
+        },
+      })}
+      tabBarOptions={{
+        activeTintColor: "#00B979",
+        inactiveTintColor: "#46B19C",
+      }}
+    >
+      <Tab.Screen name="Home" component={HomeStack} />
+      <Tab.Screen name="Profile" component={Profile} />
+      <Tab.Screen name="Hot Place" component={HotPlaceStack} />
+      <Tab.Screen name="Map" component={Map} />
+    </Tab.Navigator>
+  );
+}
+
 export default function App() {
   return (
     <>
-      {/* <Login /> */}
-      {/* <Register /> */}
       <NavigationContainer>
-        <Tab.Navigator
-          screenOptions={({ route }) => ({
-            tabBarColor: "#B3EFDD",
-            tabBarIcon: ({ focused, color, size }) => {
-              let iconName;
-
-              if (route.name === "Home") {
-                iconName = focused ? "home" : "home";
-              } else if (route.name === "Profile") {
-                iconName = focused ? "user" : "user";
-              } else if (route.name === "Hot Place") {
-                iconName = focused ? "map-marker" : "map-marker";
-              } else if (route.name === "Map") {
-                iconName = focused ? "map" : "map";
-              }
-
-              // You can return any component that you like here!
-              return <Icon name={iconName} size={size} color={color} />;
-            },
-          })}
-          tabBarOptions={{
-            activeTintColor: "#00B979",
-            inactiveTintColor: "#46B19C",
+        <Stack.Navigator
+          initialRouteName="Login"
+          screenOptions={{
+            headerShown: false,
           }}
         >
-          <Tab.Screen name="Home" component={HomeStack} />
-          <Tab.Screen name="Profile" component={Profile} />
-          <Tab.Screen name="Hot Place" component={HotPlaceStack} />
-          <Tab.Screen name="Map" component={Map} />
-        </Tab.Navigator>
+          <Stack.Screen name="Login" component={Login} />
+          <Stack.Screen name="Register" component={Register} />
+          <Stack.Screen name="TabScreen" component={TabScreen} />
+        </Stack.Navigator>
       </NavigationContainer>
     </>
   );

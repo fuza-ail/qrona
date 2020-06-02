@@ -10,13 +10,18 @@ import {
   KeyboardAvoidingView,
 } from "react-native";
 
-export default function Login() {
+export default function Login({ navigation }) {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
-  function login() {}
+  function login() {
+    // DISPATCH TO LOGIN
+    navigation.navigate("TabScreen");
+  }
 
-  function toRegister() {}
+  function toRegister() {
+    navigation.navigate("Register");
+  }
 
   return (
     <KeyboardAvoidingView style={styles.container} behavior="padding">
