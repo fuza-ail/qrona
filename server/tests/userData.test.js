@@ -7,6 +7,7 @@ require('dotenv').config()
 
 describe('User detail test', () => {
   let userToken;
+  let userToken2;
 
   const userData = {
     no_ktp: '12345678',
@@ -29,6 +30,10 @@ describe('User detail test', () => {
             userId: user.id,
             userEmail: user.email
           }, process.env.TOKEN_KEY)
+          userToken2 = jwt.sign({
+            userId: 2333333,
+            userEmail: 'asal@mail.com'
+          }, process.env.TOKEN_KEY)
           done()
         })
         .catch(error => done(error))
@@ -47,6 +52,17 @@ describe('User detail test', () => {
         .then(response => {
           const { body, status } = response;
           expect(status).toBe(200);
+          done()
+        })
+    })
+
+    test('400 fail', (done) => {
+      request(app)
+        .get('/user')
+        .set('access_token', userToken2)
+        .then(response => {
+          const { body, status } = response;
+          expect(status).toBe(404);
           done()
         })
     })
