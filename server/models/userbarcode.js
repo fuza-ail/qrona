@@ -5,6 +5,12 @@ module.exports = (sequelize, DataTypes) => {
   class UserBarcode extends Model {}
 
   UserBarcode.init({
+    id: {
+      allowNull: false,
+      autoIncrement: true,
+      primaryKey: true,
+      type: Sequelize.INTEGER
+    },
     checkin: DataTypes.DATE,
     checkout: DataTypes.DATE,
     BarcodeId: DataTypes.INTEGER,
@@ -14,6 +20,8 @@ module.exports = (sequelize, DataTypes) => {
 
   UserBarcode.associate = function(models) {
     // associations can be defined here
+    UserBarcode.belongsTo(models.User)
+    UserBarcode.belongsTo(models.Barcode)
   };
   return UserBarcode;
 };

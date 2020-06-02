@@ -28,7 +28,7 @@ describe('Barcode test', () => {
     address: 'taman mini, jakarta',
     phone: '081111111',
     barcode_url: 'google.com',
-    UserId: userId
+    // UserId: userId
   }
 
   describe('POST /hotplace - edit user', () => {
@@ -179,6 +179,7 @@ describe('Barcode test', () => {
             userEmail: user.email
           }, process.env.TOKEN_KEY)
           userId = user.id
+          hotPlace.UserId = user.id
           return Hotplace.create(hotPlace)
         })
         .then(hotplace => {
@@ -206,7 +207,7 @@ describe('Barcode test', () => {
 
     test('200 succes deleted hotplace by id', (done) => {
       request(app)
-        .delete('/hotplace/'+hotplaceBarcode.id)
+        .delete('/hotplace/'+userHotPlace.id)
         .set('access_token', userToken)
         .then(response => {
           const { body, status } = response;

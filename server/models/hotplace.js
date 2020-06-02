@@ -35,6 +35,8 @@ module.exports = (sequelize, DataTypes) => {
 
   Hotplace.associate = function(models) {
     // associations can be defined here
+    Hotplace.hasOne(models.Barcode)
+    Hotplace.belongsTo(models.User)
   };
   return Hotplace;
 };
