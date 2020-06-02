@@ -72,10 +72,7 @@ describe('User checkin and out test', () => {
         .post('/checkin')
         .set('access_token', userToken)
         .send({
-          checkin: new Date(),
-          checkout: new Date(),
           BarcodeId: hotplaceBarcode.id,
-          UserId: userId
         })
         .then(response => {
           const { body, status } = response;
@@ -132,11 +129,8 @@ describe('User checkin and out test', () => {
 
     test('200 success checkout', (done) => {
       request(app)
-        .put('/checkout/'+hotplaceBarcode.id)
+        .put(`/checkout/${hotplaceBarcode.id}`)
         .set('access_token', userToken)
-        .send({
-          checkin: new Date()
-        })
         .then(response => {
           const { body, status } = response;
           expect(status).toBe(200);

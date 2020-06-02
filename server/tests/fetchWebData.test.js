@@ -116,8 +116,8 @@ describe('Fetch data test', () => {
         .then(barcode=>{
           barcodeSatu = barcode
           return UserBarcode.create({
-            checkin:Date.now(),
-            checkout: Date.now(),
+            checkin:new Date(),
+            checkout: new Date(),
             BarcodeId: barcodeSatu.id,
             UserId: userSatu.id
           })
@@ -137,7 +137,7 @@ describe('Fetch data test', () => {
 
     test('200 success get user data by id', (done) => {
       request(app)
-        .get('/users/'+userSatu.id)
+        .get(`/users/${userSatu.id}`)
         .set('access_token', adminToken)
         .then(response => {
           const { body, status } = response;
@@ -182,8 +182,8 @@ describe('Fetch data test', () => {
         .then(barcode=>{
           barcodeSatu = barcode
           return UserBarcode.create({
-            checkin:Date.now(),
-            checkout: Date.now(),
+            checkin:new Date(),
+            checkout: new Date(),
             BarcodeId: barcodeSatu.id,
             UserId: userSatu.id
           })
@@ -248,8 +248,8 @@ describe('Fetch data test', () => {
         .then(barcode=>{
           barcodeSatu = barcode
           return UserBarcode.create({
-            checkin:Date.now(),
-            checkout: Date.now(),
+            checkin:new Date(),
+            checkout: new Date(),
             BarcodeId: barcodeSatu.id,
             UserId: userSatu.id
           })
@@ -269,7 +269,7 @@ describe('Fetch data test', () => {
 
     test('200 success get hotplaces', (done) => {
       request(app)
-        .get('/reghotplace/'+hotplaceSatu.id)
+        .get(`/reghotplace/${hotplaceSatu.id}`)
         .set('access_token', adminToken)
         .then(response => {
           const { body, status } = response;
@@ -314,8 +314,8 @@ describe('Fetch data test', () => {
         .then(barcode=>{
           barcodeSatu = barcode
           return UserBarcode.create({
-            checkin:Date.now(),
-            checkout: Date.now(),
+            checkin:new Date(),
+            checkout: new Date(),
             BarcodeId: barcodeSatu.id,
             UserId: userSatu.id
           })

@@ -145,7 +145,6 @@ class ControllerUser {
     const hotplaceId = req.params.id
     Hotplace.findByPk(hotplaceId)
       .then(hotplace => {
-        console.log(hotplace)
         if (hotplace) {
           return Hotplace.destroy({
             where: {
@@ -245,7 +244,7 @@ class ControllerUser {
         } else {
           throw {
             status: 404,
-            message: `yout haven't checked in`
+            message: `you haven't checked in`
           }
         }
       })
