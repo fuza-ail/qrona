@@ -61,13 +61,13 @@ class ControllerAdmin {
       attributes: ['id', 'no_ktp', 'name', 'email', 'address', 'status', 'phone'],
       include: {
         model: UserBarcode,
-        attributes: ['checkin', 'checkout'],
+        attributes: ['id','checkin', 'checkout'],
         include: {
           model: Barcode,
-          attributes: ['name', 'barcode_url'],
+          attributes: ['id','name', 'barcode_url'],
           include: {
             model: Hotplace,
-            attributes: ['name', 'type', 'address', 'phone']
+            attributes: ['id','name', 'type', 'address', 'phone']
           }
         }
       }
