@@ -2,14 +2,14 @@
   "development": {
     "username": "postgres",
     "password": "postgres",
-    "database": "qrona_development",
+    "database": "qrona",
     "host": "127.0.0.1",
     "dialect": "postgres"
   },
   "test": {
     "username": "postgres",
     "password": "postgres",
-    "database": "qrona_test",
+    "database": "qrona",
     "host": "127.0.0.1",
     "dialect": "postgres"
   },
