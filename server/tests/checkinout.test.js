@@ -72,11 +72,25 @@ describe('User checkin and out test', () => {
         .post('/checkin')
         .set('access_token', userToken)
         .send({
-          BarcodeId: hotplaceBarcode.id,
+          id: hotplaceBarcode.id,
         })
         .then(response => {
           const { body, status } = response;
           expect(status).toBe(201);
+          done()
+        })
+    })
+
+    test('400 no data checkin', (done) => {
+      request(app)
+        .post('/checkin')
+        .set('access_token', userToken)
+        .send({
+          id: '',
+        })
+        .then(response => {
+          const { body, status } = response;
+          expect(status).toBe(400);
           done()
         })
     })
@@ -134,6 +148,17 @@ describe('User checkin and out test', () => {
         .then(response => {
           const { body, status } = response;
           expect(status).toBe(200);
+          done()
+        })
+    })
+
+    test('404 no checkin', (done) => {
+      request(app)
+        .put(`/checkout/444444`)
+        .set('access_token', userToken)
+        .then(response => {
+          const { body, status } = response;
+          expect(status).toBe(404);
           done()
         })
     })

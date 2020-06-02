@@ -62,7 +62,14 @@ class ControllerUser {
       attributes: ['no_ktp', 'name', 'email', 'address', 'status', 'phone']
     })
       .then(user => {
-        res.status(200).json(user)
+        if (user) {
+          res.status(200).json(user)
+        } else {
+          throw {
+            status: 404,
+            message: 'fail fething data'
+          }
+        }
       })
       .catch(error => next(error))
   }
@@ -128,12 +135,19 @@ class ControllerUser {
       }
     })
       .then(hotplace => {
-        console.log(hotplace)
-        return Barcode.findOne({
-          where: {
-            HotplaceId: hotplaceId
+        // console.log(hotplace)
+        if (hotplace) {
+          return Barcode.findOne({
+            where: {
+              HotplaceId: hotplaceId
+            }
+          })
+        } else {
+          throw {
+            status: 404,
+            message: 'barcode not found'
           }
-        })
+        }
       })
       .then(barcode => {
         res.status(200).json(barcode)
@@ -159,19 +173,13 @@ class ControllerUser {
         }
       })
       .then(barcode => {
-        console.log('herre')
-        if (barcode) {
-          return Barcode.findOne({
-            where: {
-              HotplaceId: hotplaceId
-            }
-          })
-        } else {
-          throw {
-            status: 404,
-            message: 'barcode not found'
+        // console.log('herre')
+        return Barcode.findOne({
+          where: {
+            HotplaceId: hotplaceId
           }
-        }
+        })
+
       })
       .then(barcode => {
         Barcode.destroy({
@@ -211,6 +219,12 @@ class ControllerUser {
 
   static checkIn(req, res, next) {
     const barcodeId = req.body.id
+    if(barcodeId == ''){
+      throw {
+        status: 400,
+        message: 'barcode has no data'
+      }
+    }
     UserBarcode.create({
       checkin: Date.now(),
       checkout: Date.now(),
@@ -238,9 +252,11 @@ class ControllerUser {
           return UserBarcode.update({
             checkout: Date.now()
           },
-          {where:{
-            id: userbarcode.id
-          }})
+            {
+              where: {
+                id: userbarcode.id
+              }
+            })
         } else {
           throw {
             status: 404,
@@ -251,14 +267,14 @@ class ControllerUser {
       .then(userBarcode => {
         return UserBarcode.findOne({
           where: {
-            [Op.and]:[
-              {BarcodeId: barcodeId},
-              {UserId: req.user.userId}
+            [Op.and]: [
+              { BarcodeId: barcodeId },
+              { UserId: req.user.userId }
             ]
           }
         })
       })
-      .then(checkout=>{
+      .then(checkout => {
         res.status(200).json(checkout)
       })
       .catch(error => next(error))

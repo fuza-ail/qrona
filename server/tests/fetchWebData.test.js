@@ -9,6 +9,7 @@ describe('Fetch data test', () => {
   let adminToken;
   let userSatu;
   let userDua;
+  let tokentwo;
   let hotplaceSatu;
   let barcodeSatu;
 
@@ -57,6 +58,10 @@ describe('Fetch data test', () => {
           return User.create(userTwo)
         })
         .then(newUser => {
+          tokentwo = jwt.sign({
+            userId: 50055,
+            userEmail: 'lali@mail.com'
+          },process.env.TOKEN_KEY)
           userDua = newUser
           done()
         })
@@ -76,6 +81,17 @@ describe('Fetch data test', () => {
         .then(response => {
           const { body, status } = response;
           expect(status).toBe(200);
+          done()
+        })
+    })
+
+    test('404 wrong token', (done) => {
+      request(app)
+        .get('/users')
+        .set('access_token', tokentwo)
+        .then(response => {
+          const { body, status } = response;
+          expect(status).toBe(404);
           done()
         })
     })
@@ -145,6 +161,17 @@ describe('Fetch data test', () => {
           done()
         })
     })
+
+    test('404 user not found', (done) => {
+      request(app)
+        .get(`/users/44444`)
+        .set('access_token', adminToken)
+        .then(response => {
+          const { body, status } = response;
+          expect(status).toBe(404);
+          done()
+        })
+    })
   })
 
   describe('GET /reghotplace - get all hotplace data', () => {
@@ -208,6 +235,25 @@ describe('Fetch data test', () => {
         .then(response => {
           const { body, status } = response;
           expect(status).toBe(200);
+          done()
+        })
+    })
+    test('404 no access token', (done) => {
+      request(app)
+        .get('/reghotplace')
+        .then(response => {
+          const { body, status } = response;
+          expect(status).toBe(404);
+          done()
+        })
+    })
+    test('404 invalid token', (done) => {
+      request(app)
+        .get('/reghotplace')
+        .set('access_token', 'asdfwef')
+        .then(response => {
+          const { body, status } = response;
+          expect(status).toBe(400);
           done()
         })
     })
@@ -277,6 +323,17 @@ describe('Fetch data test', () => {
           done()
         })
     })
+
+    test('404 hot place not found', (done) => {
+      request(app)
+        .get(`/reghotplace/232323`)
+        .set('access_token', adminToken)
+        .then(response => {
+          const { body, status } = response;
+          expect(status).toBe(404);
+          done()
+        })
+    })
   })
 
   describe('PUT /users/:id - update status user', () => {
@@ -343,6 +400,34 @@ describe('Fetch data test', () => {
         .then(response => {
           const { body, status } = response;
           expect(status).toBe(200);
+          done()
+        })
+    })
+
+    test('404 user not found', (done) => {
+      request(app)
+        .put('/users/6666666')
+        .set('access_token', adminToken)
+        .send({
+          status: 'positif'
+        })
+        .then(response => {
+          const { body, status } = response;
+          expect(status).toBe(404);
+          done()
+        })
+    })
+
+    test('404 user not found', (done) => {
+      request(app)
+        .put('/users/234234')
+        .set('access_token', adminToken)
+        .send({
+          status: 'OTG'
+        })
+        .then(response => {
+          const { body, status } = response;
+          expect(status).toBe(404);
           done()
         })
     })

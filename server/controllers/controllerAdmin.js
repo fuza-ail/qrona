@@ -73,7 +73,14 @@ class ControllerAdmin {
       }
     })
       .then(user => {
-        res.status(200).json(user)
+        if(user){
+          res.status(200).json(user)
+        }else{
+          throw {
+            status: 404,
+            message: 'user not found'
+          }
+        }
       })
       .catch(error => next(error))
   }
@@ -192,17 +199,25 @@ class ControllerAdmin {
     }else{
       User.findByPk(userId)
       .then(user=>{
-        User.update({
-          status: inputData.status
-        },{
-          where:{id: user.id}
-        })
+        if(user){
+          return User.update({
+            status: inputData.status
+          },{
+            where:{id: user.id}
+          })
+        }else{
+          throw {
+            status: 404,
+            message: 'user not found'
+          }
+        }
       })
       .then(data=>{
         res.status(200).json({
           message: 'status has been updated'
         })
       })
+      .catch(error=>next(error))
     }
   }
 
@@ -214,8 +229,8 @@ class ControllerAdmin {
         attributes: ['id', 'name', 'email', 'address', 'phone']
       }
     })
-      .then(users => {
-        res.status(200).json(users)
+      .then(hotplaces => {
+        res.status(200).json(hotplaces)
       })
       .catch(error => next(error))
   }
@@ -237,8 +252,15 @@ class ControllerAdmin {
         }
       }
     })
-      .then(user => {
-        res.status(200).json(user)
+      .then(hotplace => {
+        if(hotplace){
+          res.status(200).json(hotplace)
+        }else{
+          throw {
+            status : 404,
+            message : 'hotplace not found'
+          }
+        }
       })
       .catch(error => next(error))
   }

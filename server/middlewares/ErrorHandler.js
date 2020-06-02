@@ -13,11 +13,7 @@ function errorHandler(err, req, res, next) {
           message: `${err.errors[0].value} already exist!`
         })
         break;
-      case 'SequelizeDatabaseError': // allowNull: false
-        console.log(err) // no not null constrain
-        break;
     }
-
   } else if (err.message) {
     res.status(err.status).json({
       message: err.message

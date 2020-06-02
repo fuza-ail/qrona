@@ -56,6 +56,119 @@ describe('User auth test',()=>{
           done()
         })
     })
+
+    test('400 empty ktp',(done)=>{
+      request(app)
+        .post('/register')
+        .send({
+          no_ktp : '',
+          name: 'dudin',
+          phone: '0122233333',
+          email: 'dudin@mail.com',
+          password: 'rahasia',
+          address: 'jalan lontong'
+        })
+        .then(response=>{
+          const {body,status}= response;
+          expect(status).toBe(400);
+          done()
+        })
+    })
+    test('400 empty name',(done)=>{
+      request(app)
+        .post('/register')
+        .send({
+          no_ktp : '123123',
+          name: '',
+          phone: '0122233333',
+          email: 'dudin@mail.com',
+          password: 'rahasia',
+          address: 'jalan lontong'
+        })
+        .then(response=>{
+          const {body,status}= response;
+          expect(status).toBe(400);
+          done()
+        })
+    })
+    test('400 empty email',(done)=>{
+      request(app)
+        .post('/register')
+        .send({
+          no_ktp : '123123',
+          name: '',
+          phone: '0122233333',
+          email: '',
+          password: 'rahasia',
+          address: 'jalan lontong'
+        })
+        .then(response=>{
+          const {body,status}= response;
+          expect(status).toBe(400);
+          done()
+        })
+    })
+    test('400 empty password',(done)=>{
+      request(app)
+        .post('/register')
+        .send({
+          no_ktp : '123123',
+          name: 'asdf',
+          phone: '0122233333',
+          email: 'dudin@mail.com',
+          password: '',
+          address: 'jalan lontong'
+        })
+        .then(response=>{
+          const {body,status}= response;
+          expect(status).toBe(400);
+          done()
+        })
+    })
+    test('400 empty address',(done)=>{
+      request(app)
+        .post('/register')
+        .send({
+          no_ktp : '123123',
+          name: 'asdf',
+          phone: '0122233333',
+          email: 'dudin@mail.com',
+          password: 'rahasia',
+          address: ''
+        })
+        .then(response=>{
+          const {body,status}= response;
+          expect(status).toBe(400);
+          done()
+        })
+    })
+    test('400 empty phone',(done)=>{
+      request(app)
+        .post('/register')
+        .send({
+          no_ktp : '123123',
+          name: 'asdf',
+          phone: '',
+          email: 'dudin@mail.com',
+          password: 'rahasia',
+          address: 'jakarta'
+        })
+        .then(response=>{
+          const {body,status}= response;
+          expect(status).toBe(400);
+          done()
+        })
+    })
+    test('400 exist data',(done)=>{
+      request(app)
+        .post('/register')
+        .send(userData)
+        .then(response=>{
+          const {body,status}= response;
+          expect(status).toBe(400);
+          done()
+        })
+    })
   })
 
   describe('POST /login - login user',()=>{

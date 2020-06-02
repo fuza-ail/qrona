@@ -168,6 +168,17 @@ describe('Barcode test', () => {
           done()
         })
     })
+
+    test('404 hotplace not found', (done) => {
+      request(app)
+        .get('/hotplace/123123123')
+        .set('access_token', userToken)
+        .then(response => {
+          const { body, status } = response;
+          expect(status).toBe(404);
+          done()
+        })
+    })
   })
 
   describe('DELETE /hotplace/:id - delete hotpalce by id', () => {
@@ -212,6 +223,16 @@ describe('Barcode test', () => {
         .then(response => {
           const { body, status } = response;
           expect(status).toBe(200);
+          done()
+        })
+    })
+    test('404 hotplace not found', (done) => {
+      request(app)
+        .delete('/hotplace/123412412')
+        .set('access_token', userToken)
+        .then(response => {
+          const { body, status } = response;
+          expect(status).toBe(404);
           done()
         })
     })
