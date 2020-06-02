@@ -161,6 +161,11 @@
 
 ##### POST /checkin --> test done
 ###### scan barcode to check in
+- Request body:
+```
+  id: <barcode id>
+```
+
 - Response (201):
 ```
 {
@@ -176,6 +181,11 @@
 
 ##### PUT /checkout/:id -- test done
 ###### scan barcode to check out
+- Request params:
+```
+  id: <barcode id>
+```
+
 - Response (200):
 ```
 {
