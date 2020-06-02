@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Button, Form } from 'react-bootstrap'
-import { useSelector, useDispatch } from 'react-redux'
+import { Button, Form, Table } from 'react-bootstrap'
 import { useParams } from 'react-router-dom'
 import axios from 'axios'
 import url from '../url'
@@ -9,7 +8,7 @@ function UserDetail() {
 
     const [data, setData] = useState('')
     const [loading, setLoading] = useState(true)
-    const [status, setStatus] = useState('negatif')
+    const [status, setStatus] = useState('')
     const [showForm, setShowForm] = useState(false)
     let { userId } = useParams()
 
@@ -25,18 +24,16 @@ function UserDetail() {
 
 
     function updateStatus() {
-        console.log('status', status)
         axios({
             method: 'PUT',
             url: url + 'users/' + userId,
             headers: { 'access_token': localStorage.access_token },
             data: { status }
+        }).then(res => {
+            let newData = { ...data, status }
+            setData(newData)
+            setShowForm(false)
         })
-            // axios.put(url + 'users/' + userId, { headers: { 'access_token': localStorage.access_token }, body: { status } })
-            .then(res => {
-                console.log(res)
-                setShowForm(false)
-            })
     }
 
     if (loading) {
@@ -67,6 +64,33 @@ function UserDetail() {
             <Button onClick={() => setShowForm(true)}>Change Status</Button>
 
         }
+
+
+        <Table>
+            <thead style={{ color: '#00B979' }}>
+                <tr>
+                    <th>QR Code</th>
+                    <th>Location Name</th>
+                    <th>Location Type</th>
+                    <th>Check In</th>
+                    <th>Check Out</th>
+                </tr>
+            </thead>
+            <tbody style={{ color: '#46B19C' }}>
+                {data.UserBarcodes.map(barcode => {
+                    return <tr key={barcode.checkin}>
+                        <td> {barcode.Barcode.barcode_url} </td>
+                        <td> {barcode.Barcode.Hotplace.name} </td>
+                        <td> {barcode.Barcode.Hotplace.type} </td>
+                        <td> {barcode.checkin} </td>
+                        <td> {barcode.checkout} </td>
+                    </tr>
+                })}
+            </tbody>
+        </Table>
+
+
+
 
 
 

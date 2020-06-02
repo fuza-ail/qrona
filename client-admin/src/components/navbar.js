@@ -17,7 +17,7 @@ function Dashboard() {
 
     return <div style={{ width: '100%' }}>
         <Navbar style={{ backgroundColor: '#65DCB8', display: 'flex', justifyContent: 'space-between' }}>
-            <Navbar.Brand href="#home">
+            <Navbar.Brand href="/">
                 <img
                     alt=""
                     src={logo}
