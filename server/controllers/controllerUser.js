@@ -44,7 +44,7 @@ class ControllerUser {
           } else {
             throw {
               status: 400,
-              mesasge: 'wrong password'
+              message: 'wrong password'
             }
           }
         } else {

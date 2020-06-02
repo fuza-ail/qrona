@@ -28,8 +28,8 @@ describe('User auth test',()=>{
   }
 
   const userLogin2 = {
-    email: 'dudin@mail.com',
-    password: 'rahasia'
+    email: 'males@mail.com',
+    password: 'salah'
   }
 
   describe('POST /register - create new user',()=>{
@@ -79,6 +79,31 @@ describe('User auth test',()=>{
           const {body,status}= response;
           expect(status).toBe(200);
           expect(body).toHaveProperty('access_token',expect.any(String));
+          done()
+        })
+    })
+
+    test('404 email not found',(done)=>{
+      request(app)
+        .post('/login')
+        .send({
+          email: 'asal@mail.com',
+          passoword: 'rahasia'
+        })
+        .then(response=>{
+          const {body,status}= response;
+          expect(status).toBe(404);
+          done()
+        })
+    })
+
+    test('400 wrong password',(done)=>{
+      request(app)
+        .post('/login')
+        .send(userLogin2)
+        .then(response=>{
+          const {body,status}= response;
+          expect(status).toBe(400);
           done()
         })
     })
