@@ -9,7 +9,7 @@ import {
   KeyboardAvoidingView,
 } from "react-native";
 import { useDispatch } from "react-redux";
-import register from "../store/actions/actionUser";
+import { register } from "../store/actions/actionUser";
 
 export default function Register({ navigation }) {
   const dispatch = useDispatch();

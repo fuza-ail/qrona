@@ -76,8 +76,8 @@ function TabScreen() {
         },
       })}
       tabBarOptions={{
-        activeTintColor: "#00B979",
-        inactiveTintColor: "#46B19C",
+        activeTintColor: "#097C54",
+        inactiveTintColor: "#00B979",
       }}
     >
       <Tab.Screen name="Home" component={HomeStack} />

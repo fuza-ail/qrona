@@ -10,7 +10,7 @@ import {
   KeyboardAvoidingView,
 } from "react-native";
 import { useDispatch } from "react-redux";
-import login from "../store/actions/actionUser";
+import { login } from "../store/actions/actionUser";
 
 export default function Login({ navigation }) {
   const [email, setEmail] = useState("");
