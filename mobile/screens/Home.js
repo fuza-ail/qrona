@@ -70,12 +70,16 @@ export default function Home({ navigation }) {
   });
 
   function toCheckIn() {
-    // navigation.navigate("CheckIn");
+    navigation.navigate("Check In");
   }
 
-  function toAddHotplace() {}
+  function toAddHotplace() {
+    navigation.navigate("Add Hotplace");
+  }
 
-  function toProtocol() {}
+  function toProtocol() {
+    navigation.navigate("Protocol");
+  }
 
   return (
     <View style={styles.container}>
@@ -90,15 +94,19 @@ export default function Home({ navigation }) {
         <TouchableOpacity onPress={toCheckIn} style={styles.menu_box}>
           <Text style={styles.box_title}>Check In</Text>
           <Text style={styles.box_desc}>
-            Lakukan Check in dengan Scan QR setiap kali anda memasuki Hot Place
-            atau angkutan umum
+            Lakukan Check in setiap kali anda memasuki Hot Place
+          </Text>
+        </TouchableOpacity>
+        <TouchableOpacity onPress={toCheckIn} style={styles.menu_box}>
+          <Text style={styles.box_title}>Check Out</Text>
+          <Text style={styles.box_desc}>
+            Lakukan Check Out setiap kali anda keluar dari Hot Place
           </Text>
         </TouchableOpacity>
         <TouchableOpacity onPress={toAddHotplace} style={styles.menu_box}>
           <Text style={styles.box_title}>Registrasi Business</Text>
           <Text style={styles.box_desc}>
-            Daftarkan Bisnis anda sebagai Hot Place. Aplikasi ini akan
-            men-generate QR yang dapat anda tempatkan dalam Hot Place anda
+            Daftarkan Bisnis anda sebagai Hot Place.
           </Text>
         </TouchableOpacity>
         <TouchableOpacity onPress={toProtocol} style={styles.menu_box}>

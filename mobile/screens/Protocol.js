@@ -19,56 +19,169 @@ export default function Protocol() {
             width: 290,
           }}
         >
-          <Text style={styles.title}>Template Title</Text>
+          <Text style={styles.title}>
+            Aturan New Normal Kemenkes untuk Cegah Penularan COVID-19
+          </Text>
           <Text style={styles.info}>
-            Hello
+            Peraturan Pemerintah nomor 21 Tahun 2020 tentang Pembatasan Sosial
+            Berskala Besar (PSBB) dalam rangka percepatan penanganan COVID-19
             {"\n"}
             {"\n"}
-            1. This is like ul li in hmtl{"\n"}
-            2. but its build manually{"\n"}
-            3. its quite nice tho
+            Panduan pencegahan penularan COVID-19 secara rinci antara lain:
             {"\n"}
             {"\n"}
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent
-            hendrerit placerat dolor non dapibus. Pellentesque non ipsum quis
-            massa fermentum vulputate id nec est. Etiam cursus vitae ex eget
-            malesuada. Suspendisse eget efficitur nulla. Pellentesque sit amet
-            blandit nisl, eu pharetra felis. Aliquam erat volutpat. Sed
-            efficitur molestie pellentesque. Etiam in consequat sapien,
-            hendrerit tempor lorem.
+            A. Selama PSBB bagi Tempat Kerja
             {"\n"}
             {"\n"}
-            Vestibulum tortor elit, congue non mauris eu, iaculis interdum quam.
-            Nullam rhoncus egestas dictum. Nam blandit fringilla tortor eget
-            rutrum. Donec augue arcu, congue in turpis at, lobortis tristique
-            purus. Donec maximus tellus a urna dignissim pulvinar. Mauris a
-            gravida massa. Donec sit amet dignissim magna. In dui orci, rutrum
-            quis lorem et, venenatis cursus libero. Maecenas ut mi odio. Nullam
-            scelerisque, nisi ac eleifend tincidunt, ipsum justo auctor nulla,
-            ut sodales lacus nulla a massa. Maecenas feugiat augue eget
-            fermentum imperdiet.
+            a. Kebijakan Manajemen dalam Pencegahan Penularan COVID-19
             {"\n"}
             {"\n"}
-            Praesent eget turpis id diam convallis gravida. Suspendisse nec dui
-            sit amet dui vestibulum feugiat. Sed id lacus et sapien feugiat
-            interdum. Vestibulum ante ipsum primis in faucibus orci luctus et
-            ultrices posuere cubilia curae; In viverra enim sed nisi ultricies
-            ultricies. Praesent eget nisi nec tortor suscipit pellentesque. Nunc
-            ac nunc auctor, varius neque et, fermentum dui. Nulla pulvinar nulla
-            nec molestie accumsan. Vestibulum vulputate turpis vel nulla aliquam
-            consectetur. Vivamus condimentum sodales nibh quis egestas.
+            1) Pihak manajemen agar senantiasa memantau dan memperbaharui
+            perkembangan informasi tentang COVID-19 di wilayahnya. (Secara
+            berkala dapat diakses di http://infeksiemerging.kemkes.go.id. dan
+            kebijakan Pemerintah Daerah setempat).
             {"\n"}
             {"\n"}
-            Mauris tristique quis tortor non egestas. Nullam sit amet diam
-            ligula. In nunc lorem, feugiat id tortor in, faucibus lacinia leo.
-            Suspendisse lorem erat, iaculis sit amet enim non, pretium elementum
-            ipsum. Proin tincidunt, metus bibendum hendrerit pellentesque, diam
-            eros pretium elit, vitae posuere magna neque vel mauris. Nulla
-            facilisi. Praesent sollicitudin nisi iaculis tellus tristique, id
-            commodo libero volutpat. Nullam sagittis blandit ligula id feugiat.
-            Nulla efficitur ultricies nisi, quis molestie diam cursus vel. Donec
-            gravida, quam ornare consequat efficitur, justo risus faucibus nibh,
-            eget ultrices nulla arcu in ex.
+            2) Pembentukan Tim Penanganan Covid-19 di tempat kerja yang terdiri
+            dari Pimpinan, bagian kepegawaian, bagian K3 dan petugas Kesehatan
+            yang diperkuat dengan Surat Keputusan dari Pimpinan Tempat Kerja.
+            {"\n"}
+            {"\n"}
+            3) Pimpinan atau pemberi kerja memberikan kebijakan dan prosedur
+            untuk pekerja melaporkan setiap ada kasus dicurigai Covid-19 (gejala
+            demam atau batuk/pilek/nyeri tenggorokan/sesak nafas) untuk
+            dilakukan pemantauan oleh petugas kesehatan.
+            {"\n"}
+            {"\n"}
+            4) Tidak memperlakukan kasus positif sebagai suatu stigma.
+            {"\n"}
+            {"\n"}
+            5) Pengaturan bekerja dari rumah (work from home). Menentukan
+            pekerja esensial yang perlu tetap bekerja/datang ke tempat kerja dan
+            pekerja yang dapat melakukan pekerjaan dari rumah.
+            {"\n"}
+            {"\n"}
+            b. Jika ada pekerja esensial yang harus tetap bekerja selama PSBB
+            berlangsung:
+            {"\n"}
+            {"\n"}
+            1) Di pintu masuk tempat kerja lakukan pengukuran suhu dengan
+            menggunakan thermogun, dan sebelum masuk kerja terapkan Self
+            Assessment Risiko Covid-19 untuk memastikan pekerja yang akan masuk
+            kerja dalam kondisi tidak terjangkit Covid-19.
+            {"\n"}
+            {"\n"}
+            2) Pengaturan waktu kerja tidak terlalu panjang (lembur) yang akan
+            mengakibatkan pekerja kekurangan waktu untuk beristirahat yang dapat
+            menyebabkan penurunan sistem kekebalan/imunitas tubuh.
+            {"\n"}
+            {"\n"}
+            3) Untuk pekerja shift :{"\n"}
+            {"\n"}
+            a) Jika memungkinkan tiadakan shift 3 (waktu kerja yang dimulai pada
+            malam hingga pagi hari)
+            {"\n"}
+            {"\n"}
+            b) Bagi pekerja shift 3 atur agar yang bekerja terutama pekerja
+            berusia kurang dari 50 tahun.
+            {"\n"}
+            {"\n"}
+            4) Mewajibkan pekerja menggunakan masker sejak perjalanan dari/ke
+            rumah, dan selama di tempat kerja.
+            {"\n"}
+            {"\n"}
+            5) Mengatur asupan nutrisi makanan yang diberikan oleh tempat kerja,
+            pilih buah-buahan yang banyak mengandung vitamin C seperti jeruk,
+            jambu, dan sebagainya untuk membantu mempertahankan daya tahan
+            tubuh. Jika memungkinkan pekerja dapat diberikan suplemen vitamin C.
+            {"\n"}
+            {"\n"}
+            6) Memfasilitasi tempat kerja yang aman dan sehat,
+            {"\n"}
+            {"\n"}
+            a) Higiene dan sanitasi lingkungan kerja
+            {"\n"}
+            {"\n"}- Memastikan seluruh area kerja bersih dan higienis dengan
+            melakukan pembersihan secara berkala menggunakan pembersih dan
+            desinfektan yang sesuai (setiap 4 jam sekali). Terutama pegangan
+            pintu dan tangga, tombol lift, peralatan kantor yang digunakan
+            bersama, area dan fasilitas umum lainnya.
+            {"\n"}- Menjaga kualitas udara tempat kerja dengan mengoptimalkan
+            sirkulasi udara dan sinar matahari masuk ruangan kerja, pembersihan
+            filter AC.
+            {"\n"}
+            {"\n"}
+            b) Sarana cuci tangan {"\n"}
+            {"\n"}- Menyediakan lebih banyak sarana cuci tangan (sabun dan air
+            mengalir). {"\n"}- Memberikan petunjuk lokasi sarana cuci tangan{" "}
+            {"\n"}- Memasang poster edukasi cara mencuci tangan yang benar.{" "}
+            {"\n"}- Menyediakan handsanitizer dengan konsentrasi alkohol minimal
+            70% di tempat-tempat yang diperlukan (seperti pintu masuk, ruang
+            meeting, pintu lift, dll)
+            {"\n"}
+            {"\n"}
+            c) Physical Distancing dalam semua aktifitas kerja. Pengaturan jarak
+            antar pekerja minimal 1 meter pada setiap aktifitas kerja
+            (pengaturan meja kerja/workstation, pengaturan kursi saat di kantin,
+            dll).
+            {"\n"}
+            {"\n"}
+            d) Mengkampanyekan Gerakan Masyarakat Hidup Sehat (GERMAS) melalui
+            Pola Hidup Sehat dan Perilaku Hidup Bersih dan Sehat (PHBS) di
+            tempat kerja sebagai berikut:
+            {"\n"}
+            {"\n"}- Cuci Tangan Pakai Sabun (CTPS) Mendorong pekerja mencuci
+            tangan saat tiba di tempat kerja, sebelum makan, setelah kontak
+            dengan pelanggan/pertemuan dengan orang lain, setelah dari kamar
+            mandi, setelah memegang benda yang kemungkinan terkontaminasi.
+            {"\n"}- Etika batuk Membudayakan etika batuk (tutup mulut dan hidung
+            dengan lengan atas bagian dalam) dan jika menggunakan tisu untuk
+            menutup batuk dan pilek, buang tisu bekas ke tempat sampah yang
+            tertutup dan cuci tangan dengan sabun dan air mengalir setelahnya.
+            {"\n"}- Olahraga bersama sebelum kerja dengan tetap menjaga jarak
+            aman, dan anjuran berjemur matahari saat jam istirahat.
+            {"\n"}- Makan makanan dengan gizi seimbang.
+            {"\n"}- Hindari penggunaan alat pribadi secara bersama seperti alat
+            sholat, alat makan, dan lain lain.
+            {"\n"}
+            {"\n"}
+            c. Sosialisasi dan Edukasi pekerja mengenai Covid-19
+            {"\n"}
+            {"\n"}
+            1) Edukasi dilakukan secara intensif kepada seluruh pekerja dan
+            keluarga agar memberikan pemahaman yang benar terkait masalah
+            pandemi Covid-19, sehingga pekerja mendapatkan pengetahuan untuk
+            secara mandiri melakukan tindakan preventif dan promotif guna
+            mencegah penularan penyakit, serta mengurangi kecemasan berlebihan
+            akibat informasi tidak benar.
+            {"\n"}
+            {"\n"}
+            2) Materi edukasi yang dapat diberikan:
+            {"\n"}
+            {"\n"}
+            a) Penyebab COVID-19 dan cara pencegahannya
+            {"\n"}
+            {"\n"}
+            b) Mengenali gejala awal penyakit dan tindakan yang harus dilakukan
+            saat gejala timbul.
+            {"\n"}
+            {"\n"}
+            c) Praktek PHBS seperti praktek mencuci tangan yang benar, etika
+            batuk
+            {"\n"}
+            {"\n"}
+            d) Alur pelaporan dan pemeriksaan bila didapatkan kecurigaan
+            {"\n"}
+            {"\n"}
+            e) Metode edukasi yang dapat dilakukan: pemasangan banner, pamphlet,
+            majalah dinding, dll di area strategis yang mudah dilihat setiap
+            pekerja seperti di pintu masuk, area makan/kantin, area istirahat,
+            tangga serta media audio & video yang disiarkan secara berulang.
+            SMS/whats up blast ke semua pekerja secara berkala untuk
+            mengingatkan.
+            {"\n"}
+            {"\n"}
+            f) Materi edukasi dapat diakses pada www.covid19.go.id.
           </Text>
         </ScrollView>
       </View>
@@ -101,7 +214,8 @@ const styles = StyleSheet.create({
   title: {
     color: "#566573",
     fontWeight: "bold",
-    marginBottom: 5,
+    textAlign: "center",
+    marginBottom: 15,
   },
   info: {
     color: "#566573",

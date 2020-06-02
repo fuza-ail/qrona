@@ -13,11 +13,13 @@ export default function Register() {
   const [name, setName] = useState("");
   const [no_ktp, setNo_ktp] = useState("");
   const [phone, setPhone] = useState("");
-  const [address, setAdress] = useState("");
+  const [adress, setAdress] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
-  function register() {}
+  function register() {
+    // DISPATCH TO REGISTER
+  }
 
   return (
     <KeyboardAvoidingView style={styles.container} behavior="padding">
@@ -58,7 +60,7 @@ export default function Register() {
         <TextInput
           style={styles.input}
           onChangeText={(text) => setAdress(text)}
-          value={address}
+          value={adress}
           placeholder="Enter Adress"
           placeholderTextColor="#46B19C"
           autoCorrect={false}

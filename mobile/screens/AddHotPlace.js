@@ -9,13 +9,16 @@ import {
   KeyboardAvoidingView,
 } from "react-native";
 
-export default function Register() {
+export default function Register({ navigation }) {
   const [name, setName] = useState("");
   const [type, setType] = useState("");
   const [phone, setPhone] = useState("");
   const [address, setAdress] = useState("");
 
-  function addHotPlace() {}
+  function addHotPlace() {
+    // DISPATCH TO ADD HOTPLACE
+    navigation.navigate("HotPlace");
+  }
 
   return (
     <KeyboardAvoidingView style={styles.container} behavior="padding">
@@ -60,7 +63,10 @@ export default function Register() {
         <TouchableOpacity onPress={addHotPlace} style={styles.btn}>
           <Text style={styles.btn_text}>Add</Text>
         </TouchableOpacity>
-        <TouchableOpacity style={styles.btn_off}>
+        <TouchableOpacity
+          onPress={() => navigation.goBack()}
+          style={styles.btn_off}
+        >
           <Text style={styles.btn_text}>Cancel</Text>
         </TouchableOpacity>
       </ScrollView>

@@ -8,7 +8,7 @@ import {
 } from "react-native";
 import Place from "../components/Place";
 
-export default function HotPlace(props) {
+export default function HotPlace({ navigation }) {
   const places = [
     {
       id: 1,
@@ -26,7 +26,9 @@ export default function HotPlace(props) {
     },
   ];
 
-  function toProtocol() {}
+  function toAddPlace() {
+    navigation.navigate("Add Hotplace");
+  }
 
   return (
     <View style={styles.container}>
@@ -34,7 +36,7 @@ export default function HotPlace(props) {
         <Text style={styles.screenTitle}>My Hot Place</Text>
         <Place places={places} />
       </ScrollView>
-      <TouchableOpacity onPress={toProtocol} style={styles.btn}>
+      <TouchableOpacity onPress={toAddPlace} style={styles.btn}>
         <Text style={styles.btn_text}>Add Hot Place</Text>
       </TouchableOpacity>
     </View>
