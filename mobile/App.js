@@ -63,7 +63,7 @@ function TabScreen() {
             iconName = focused ? "home" : "home";
           } else if (route.name === "Profile") {
             iconName = focused ? "user" : "user";
-          } else if (route.name === "Hot Place") {
+          } else if (route.name === "Crowd Point") {
             iconName = focused ? "map-marker" : "map-marker";
           } else if (route.name === "Map") {
             iconName = focused ? "map" : "map";
@@ -80,7 +80,7 @@ function TabScreen() {
     >
       <Tab.Screen name="Home" component={HomeStack} />
       <Tab.Screen name="Profile" component={Profile} />
-      <Tab.Screen name="Hot Place" component={HotPlaceStack} />
+      <Tab.Screen name="Crowd Point" component={HotPlaceStack} />
       <Tab.Screen name="Map" component={Map} />
     </Tab.Navigator>
   );

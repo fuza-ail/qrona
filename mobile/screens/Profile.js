@@ -7,6 +7,7 @@ import {
   TouchableOpacity,
   ScrollView,
 } from "react-native";
+import StatusUSer from "../components/StatusUser";
 
 export default function Profile(props) {
   const user = {
@@ -15,7 +16,24 @@ export default function Profile(props) {
     phone: "123456789012",
     adress: "5, 48 Pirrama Rd, Pyrmont NSW 2009, AUS",
     email: "hamzah@mail.com",
+    status: "OTG",
   };
+
+  let colorCode;
+  let status;
+  if (user.status === "positif") {
+    colorCode = "#FFA69D";
+    status = "Positif";
+  } else if (user.status === "OTG") {
+    colorCode = "#FFC3A0";
+    status = "OTG";
+  } else if (user.status === "ODP") {
+    colorCode = "#FFF2AF";
+    status = "ODP";
+  } else {
+    colorCode = "#46B19C";
+    status = "Negatif";
+  }
 
   const [isUpdate, setIsUpdate] = useState(false);
   const [name, setName] = useState(user.name);
@@ -46,22 +64,22 @@ export default function Profile(props) {
           <Text style={styles.screenTitle}>Update Profile</Text>
           <TextInput
             style={styles.input}
+            onChangeText={(text) => setNo_ktp(text)}
+            value={no_ktp}
+            editable={false}
+          />
+          <TextInput
+            style={styles.input}
+            onChangeText={(text) => setEmail(text)}
+            value={email}
+            editable={false}
+          />
+          <TextInput
+            style={styles.input}
             onChangeText={(text) => setName(text)}
             value={name}
             placeholder="Enter Name"
             placeholderTextColor="#46B19C"
-            autoCorrect={false}
-          />
-          <TextInput
-            style={styles.input}
-            onChangeText={(text) => setNo_ktp(text)}
-            value={no_ktp}
-            keyboardType="numeric"
-            minLength={16}
-            maxLength={16}
-            placeholder="Enter KTP Number"
-            placeholderTextColor="#46B19C"
-            autoCapitalize="none"
             autoCorrect={false}
           />
           <TextInput
@@ -84,15 +102,6 @@ export default function Profile(props) {
             placeholderTextColor="#46B19C"
             autoCorrect={false}
           />
-          <TextInput
-            style={styles.input}
-            onChangeText={(text) => setEmail(text)}
-            value={email}
-            placeholder="Enter Email"
-            placeholderTextColor="#46B19C"
-            autoCapitalize="none"
-            autoCorrect={false}
-          />
         </ScrollView>
         <TouchableOpacity onPress={updateUser} style={styles.btn}>
           <Text style={styles.btn_text}>Update</Text>
@@ -107,26 +116,25 @@ export default function Profile(props) {
   return (
     <View style={styles.container}>
       <ScrollView contentContainerStyle={{ alignItems: "center", width: 375 }}>
-        <Text style={styles.screenTitle}>Profile</Text>
-        <Text style={styles.prof_title}>Name</Text>
-        <View style={styles.prof_box}>
-          <Text style={styles.prof_value}>{user.name}</Text>
+        <Text style={styles.screenTitle}>{user.name}</Text>
+        <View style={styles.status}>
+          <StatusUSer status={status} colorCode={colorCode} />
         </View>
         <Text style={styles.prof_title}>KTP Number</Text>
         <View style={styles.prof_box}>
           <Text style={styles.prof_value}>{user.no_ktp}</Text>
         </View>
-        <Text style={styles.prof_title}>Phone Number</Text>
+        <Text style={styles.prof_title}>Email</Text>
+        <View style={styles.prof_box}>
+          <Text style={styles.prof_value}>{user.email}</Text>
+        </View>
+        <Text style={styles.prof_title}>Phone</Text>
         <View style={styles.prof_box}>
           <Text style={styles.prof_value}>{user.phone}</Text>
         </View>
         <Text style={styles.prof_title}>Adress</Text>
         <View style={styles.prof_box}>
           <Text style={styles.prof_value}>{user.adress}</Text>
-        </View>
-        <Text style={styles.prof_title}>Email</Text>
-        <View style={styles.prof_box}>
-          <Text style={styles.prof_value}>{user.email}</Text>
         </View>
       </ScrollView>
       <TouchableOpacity onPress={toUpdate} style={styles.btn}>
@@ -160,7 +168,8 @@ const styles = StyleSheet.create({
   prof_title: {
     fontSize: 16,
     color: "#46B19C",
-    marginVertical: 10,
+    marginTop: 15,
+    marginBottom: 10,
   },
   prof_box: {
     width: 320,

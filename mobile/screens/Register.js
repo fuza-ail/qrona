@@ -19,21 +19,13 @@ export default function Register({ navigation }) {
 
   function register() {
     // DISPATCH TO REGISTER
-    navigation.navigate("Login");
+    navigation.navigate("TabScreen");
   }
 
   return (
     <KeyboardAvoidingView style={styles.container} behavior="padding">
       <ScrollView contentContainerStyle={{ alignItems: "center", width: 375 }}>
         <Text style={styles.screenTitle}>Registration Form</Text>
-        <TextInput
-          style={styles.input}
-          onChangeText={(text) => setName(text)}
-          value={name}
-          placeholder="Enter Name"
-          placeholderTextColor="#46B19C"
-          autoCorrect={false}
-        />
         <TextInput
           style={styles.input}
           onChangeText={(text) => setNo_ktp(text)}
@@ -44,6 +36,23 @@ export default function Register({ navigation }) {
           placeholder="Enter KTP Number"
           placeholderTextColor="#46B19C"
           autoCapitalize="none"
+          autoCorrect={false}
+        />
+        <TextInput
+          style={styles.input}
+          onChangeText={(text) => setEmail(text)}
+          value={email}
+          placeholder="Enter Email"
+          placeholderTextColor="#46B19C"
+          autoCapitalize="none"
+          autoCorrect={false}
+        />
+        <TextInput
+          style={styles.input}
+          onChangeText={(text) => setName(text)}
+          value={name}
+          placeholder="Enter Name"
+          placeholderTextColor="#46B19C"
           autoCorrect={false}
         />
         <TextInput
@@ -66,15 +75,7 @@ export default function Register({ navigation }) {
           placeholderTextColor="#46B19C"
           autoCorrect={false}
         />
-        <TextInput
-          style={styles.input}
-          onChangeText={(text) => setEmail(text)}
-          value={email}
-          placeholder="Enter Email"
-          placeholderTextColor="#46B19C"
-          autoCapitalize="none"
-          autoCorrect={false}
-        />
+
         <TextInput
           style={styles.input}
           onChangeText={(text) => setPassword(text)}

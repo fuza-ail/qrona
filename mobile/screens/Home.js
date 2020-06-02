@@ -89,7 +89,6 @@ export default function Home({ navigation }) {
     <View style={styles.container}>
       <ScrollView contentContainerStyle={{ alignItems: "center", width: 375 }}>
         <StatusCard
-          style={styles.statusCard}
           status={status}
           position={position}
           colorCode={colorCode}
@@ -98,19 +97,19 @@ export default function Home({ navigation }) {
         <TouchableOpacity onPress={toCheckIn} style={styles.menu_box}>
           <Text style={styles.box_title}>Check In</Text>
           <Text style={styles.box_desc}>
-            Lakukan Check in setiap kali anda memasuki Hot Place
+            Lakukan Check in setiap kali anda memasuki Crowd Point
           </Text>
         </TouchableOpacity>
         <TouchableOpacity onPress={toCheckOut} style={styles.menu_box}>
           <Text style={styles.box_title}>Check Out</Text>
           <Text style={styles.box_desc}>
-            Lakukan Check Out setiap kali anda keluar dari Hot Place
+            Lakukan Check Out setiap kali anda keluar dari Crowd Point
           </Text>
         </TouchableOpacity>
         <TouchableOpacity onPress={toAddHotplace} style={styles.menu_box}>
           <Text style={styles.box_title}>Registrasi Business</Text>
           <Text style={styles.box_desc}>
-            Daftarkan Bisnis anda sebagai Hot Place.
+            Daftarkan Bisnismu sebagai Crowd Point
           </Text>
         </TouchableOpacity>
         <TouchableOpacity onPress={toProtocol} style={styles.menu_box}>
@@ -127,9 +126,6 @@ const styles = StyleSheet.create({
     flex: 1,
     alignItems: "center",
     backgroundColor: "#65DCB8",
-  },
-  statusCard: {
-    margin: 3,
   },
   menu_box: {
     backgroundColor: "#B3EFDD",
