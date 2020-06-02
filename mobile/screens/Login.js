@@ -9,14 +9,25 @@ import {
   TouchableOpacity,
   KeyboardAvoidingView,
 } from "react-native";
+import { useDispatch } from "react-redux";
+import login from "../store/actions/actionUser";
 
 export default function Login({ navigation }) {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const dispatch = useDispatch();
 
-  function login() {
+  function loginUser() {
     // DISPATCH TO LOGIN
-    navigation.navigate("TabScreen");
+    if (email === "") {
+      alert("Email Must Filled");
+    } else if (password === "") {
+      alert("Password Must Filled");
+    } else {
+      const loginData = { email, password };
+      dispatch(login(loginData));
+      navigation.navigate("TabScreen");
+    }
   }
 
   function toRegister() {
@@ -47,7 +58,7 @@ export default function Login({ navigation }) {
           autoCapitalize="none"
           autoCorrect={false}
         />
-        <TouchableOpacity onPress={login} style={styles.btn}>
+        <TouchableOpacity onPress={loginUser} style={styles.btn}>
           <Text style={styles.btn_text}>Login</Text>
         </TouchableOpacity>
         <Text style={styles.info}>Dont have any Account?</Text>

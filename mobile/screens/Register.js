@@ -8,18 +8,37 @@ import {
   ScrollView,
   KeyboardAvoidingView,
 } from "react-native";
+import { useDispatch } from "react-redux";
+import register from "../store/actions/actionUser";
 
 export default function Register({ navigation }) {
-  const [name, setName] = useState("");
+  const dispatch = useDispatch();
   const [no_ktp, setNo_ktp] = useState("");
-  const [phone, setPhone] = useState("");
-  const [adress, setAdress] = useState("");
   const [email, setEmail] = useState("");
+  const [name, setName] = useState("");
+  const [phone, setPhone] = useState("");
+  const [address, setAddress] = useState("");
   const [password, setPassword] = useState("");
 
-  function register() {
+  function registerUser() {
     // DISPATCH TO REGISTER
-    navigation.navigate("TabScreen");
+    if (no_ktp === "") {
+      alert("KTP Number Must Filled");
+    } else if (email === "") {
+      alert("Email Must Filled");
+    } else if (name === "") {
+      alert("Name Must Filled");
+    } else if (phone === "") {
+      alert("Phone Must Filled");
+    } else if (address === "") {
+      alert("Address Must Filled");
+    } else if (password === "") {
+      alert("Password Must Filled");
+    } else {
+      const registerData = { no_ktp, email, name, phone, address, password };
+      dispatch(register(registerData));
+      navigation.navigate("TabScreen");
+    }
   }
 
   return (
@@ -69,9 +88,9 @@ export default function Register({ navigation }) {
         />
         <TextInput
           style={styles.input}
-          onChangeText={(text) => setAdress(text)}
-          value={adress}
-          placeholder="Enter Adress"
+          onChangeText={(text) => setAddress(text)}
+          value={address}
+          placeholder="Enter Address"
           placeholderTextColor="#46B19C"
           autoCorrect={false}
         />
@@ -86,7 +105,7 @@ export default function Register({ navigation }) {
           autoCapitalize="none"
           autoCorrect={false}
         />
-        <TouchableOpacity onPress={register} style={styles.btn}>
+        <TouchableOpacity onPress={registerUser} style={styles.btn}>
           <Text style={styles.btn_text}>Register</Text>
         </TouchableOpacity>
         <TouchableOpacity
