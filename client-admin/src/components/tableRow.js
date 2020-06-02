@@ -1,7 +1,9 @@
+//no  longer use
+
 import React, { useState } from 'react';
 import { Form, Button } from 'react-bootstrap'
 import { useSelector, useDispatch } from 'react-redux'
-import { setUsers } from '../store/actions/usersActions'
+import { getUsers } from '../store/actions/usersActions'
 
 
 function Row(props) {
@@ -15,7 +17,7 @@ function Row(props) {
         let idx = payload.findIndex(data => data.id == user.id)
         payload.splice(idx, 1, newUser)
         console.log(payload)
-        dispatch(setUsers(payload))
+        dispatch(getUsers(payload))
         props.hideEdit()
     }
 

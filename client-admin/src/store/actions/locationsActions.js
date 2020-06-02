@@ -2,12 +2,12 @@ import axios from 'axios'
 import url from '../../url'
 
 
-export const getUsers = () => {
+export const getLocations = () => {
     return (dispatch, getState) => {
-        axios.get(url + 'users', { headers: { 'access_token': localStorage.access_token } })
+        axios.get(url + 'reghotplace', { headers: { 'access_token': localStorage.access_token } })
             .then(res => {
                 dispatch({
-                    type: "SET_USERS",
+                    type: "SET_LOCATIONS",
                     payload: res.data,
                 })
             }).catch(err => {

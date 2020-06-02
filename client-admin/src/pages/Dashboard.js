@@ -1,14 +1,15 @@
 import React, { useState } from 'react';
-import { useHistory } from "react-router-dom";
+import { useHistory, Route, Link, Switch } from "react-router-dom";
 import UserTable from '../components/users'
 import LocationTable from '../components/locations'
 import Navbar from '../components/navbar'
+import LocationDetails from '../components/locationDetails'
+import UserDetail from '../components/userDetails'
 
 function Dashboard() {
     const history = useHistory();
     const [showUsers, setShowUsers] = useState(true)
 
-    console.log(history)
     //check if login
     if (!localStorage.access_token) {
         history.push("/login")
@@ -18,16 +19,28 @@ function Dashboard() {
     return <div style={{ display: 'flex', alignItems: 'center', height: '100vh', flexDirection: 'column' }}>
         <Navbar />
 
+
         <h1 style={{ padding: 20, color: '#00B979' }}>DashBoard</h1>
         <div style={{ display: 'flex', alignItems: 'center', width: '100%', justifyContent: 'center' }}>
-            <a onClick={() => setShowUsers(true)} style={{ cursor: 'pointer' }}>Users Data</a>
-            <a>&nbsp; |  &nbsp;</a>
-            <a onClick={() => setShowUsers(false)} style={{ cursor: 'pointer' }}>Locations Data</a>
+            <Link to={'/'}>User Data</Link> &nbsp; |  &nbsp; <Link to={'/locations'}>Locations Data</Link>
         </div>
 
-        <div style={{ width: '85vw' }}>
-            {showUsers ? <UserTable /> : <LocationTable />}
-        </div>
+
+
+        <Switch>
+            <Route path="/locations/:locationId">
+                <LocationDetails />
+            </Route>
+            <Route path="/locations">
+                <LocationTable />
+            </Route>
+            <Route path="/users/:userId">
+                <UserDetail />
+            </Route>
+            <Route path="/">
+                <UserTable />
+            </Route>
+        </Switch>
 
     </div >
 }

@@ -1,15 +1,14 @@
+//no longer used
 import React, { useState } from 'react';
 import Row from './tableRow'
 import { Table } from 'react-bootstrap'
-import { useSelector } from 'react-redux'
+
 
 
 function TableView(props) {
     const { users } = props
 
     const [editId, setEditId] = useState(false)
-
-
 
     function showEdit(id) {
         setEditId(id)
@@ -35,7 +34,7 @@ function TableView(props) {
                 </thead>
                 <tbody style={{ color: '#46B19C' }}>
                     {users.map(user => {
-                        return <Row key={user.id} user={user} showEdit={(id) => showEdit(id)} hideEdit={() => hideEdit()} isForm={editId == user.id ? true : false} ></Row>
+                        return <Row key={user.id} user={user} showEdit={(id) => showEdit(id)} hideEdit={() => hideEdit()} isForm={Number(editId) === Number(user.id) ? true : false} ></Row>
                     })}
                 </tbody>
             </Table>

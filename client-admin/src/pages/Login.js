@@ -2,6 +2,11 @@ import React, { useState } from 'react';
 import { Form, Button } from 'react-bootstrap'
 import logo from '../logo.png'
 import { useHistory } from "react-router-dom";
+import url from '../url'
+import axios from 'axios'
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+
 
 
 
@@ -20,8 +25,21 @@ function Login() {
     function login(e) {
         e.preventDefault()
         //localsotrage test
-        localStorage.setItem('access_token', email)
-        history.push("/")
+        axios.post(url + 'loginadmin', { email, password })
+            .then(response => {
+                localStorage.setItem('access_token', response.data.access_token)
+                history.push("/")
+            }).catch(err => {
+                toast.error('Invalid Cridentials', {
+                    position: "top-right",
+                    autoClose: 3000,
+                    hideProgressBar: true,
+                    closeOnClick: true,
+                    pauseOnHover: true,
+                    draggable: true,
+                    progress: undefined,
+                });
+            })
     }
 
 
@@ -47,6 +65,18 @@ function Login() {
             </Form>
 
         </div>
+
+        <ToastContainer
+            position="top-right"
+            autoClose={3000}
+            hideProgressBar
+            newestOnTop={false}
+            closeOnClick
+            rtl={false}
+            pauseOnFocusLoss
+            draggable
+            pauseOnHover
+        />
 
 
 
