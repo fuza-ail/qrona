@@ -5,7 +5,7 @@ import {
 	View,
 	ScrollView,
 	TouchableOpacity,
-	AsyncStorage
+	Alert
 } from "react-native";
 import Place from "../components/Place";
 import { useSelector, useDispatch } from "react-redux";
@@ -16,30 +16,39 @@ export default function HotPlace({ navigation }) {
 	const dispatch = useDispatch();
 	const { access_token } = useSelector(state => state.reducerUser);
 	const { places } = useSelector(state => state.reducerHotPlace);
-
+	const confirmDelete = crowdPoint =>
+		Alert.alert(
+			"Delete",
+			"delete this crowd point ?" + JSON.stringify(crowdPoint.id),
+			[
+				{
+					text: "Cancel",
+					onPress: () => {},
+					style: "cancel"
+				},
+				{ text: "OK", onPress: () => deleteCrowdPoint(crowdPoint.id) }
+			],
+			{ cancelable: false }
+		);
 	useEffect(() => {
 		dispatch(getPlaces(access_token));
 	}, []);
-	// const places = [
-	//   {
-	//     id: 1,
-	//     name: "Mini Market Asyik",
-	//     adress: "5, 48 Pirrama Rd, Pyrmont NSW 2009, Australia",
-	//     // linkQR: "abcdef",
-	//     // imgUrl: "abcdef",
-	//   },
-	//   {
-	//     id: 2,
-	//     name: "Warung Makan Sihuy",
-	//     adress: "5, 48 Pirrama Rd, Pyrmont NSW 2009, Australia",
-	//     // imgUrl: "abcdef",
-	//     // linkQR: "abcdef",
-	//   },
-	// ];
 
+	function deleteCrowdPoint(id) {
+		axios({
+			url: `https://vast-woodland-47918.herokuapp.com/hotplace/${id}`,
+			method: "DELETE",
+			headers: { access_token }
+		})
+			.then(res => {
+				alert("Delete success");
+				dispatch(getPlaces(access_token));
+			})
+			.catch(err => alert(err));
+	}
 	function toQrHotplace(place) {
 		axios({
-			url: `https://thawing-plains-96418.herokuapp.com/hotplace/${place.id}`,
+			url: `https://vast-woodland-47918.herokuapp.com/hotplace/${place.id}`,
 			method: "GET",
 			headers: { access_token }
 		})
@@ -48,29 +57,6 @@ export default function HotPlace({ navigation }) {
 			})
 			.catch(err => alert(err));
 	}
-
-	// useEffect(() => {
-	//   AsyncStorage.getItem("access_token", (err, res) => {
-	//     if (res) {
-	//       set_access_token(res);
-	//       alert("dapet" + res);
-	//     }
-	//   });
-	//   axios({
-	//     method: "get",
-	//     url: "http/hotplace",
-	//     headers: { access_token: access_token },
-	//   })
-	//     .then((res) => {
-	//       // alert(res.data);
-	//       // console.log(res.data);
-	//       // setPlaces(res.data);
-	//       dispatch({ type: "GET_PLACES", payload: res.data });
-	//     })
-	//     .catch((err) => {
-	//       alert(err);
-	//     });
-	// }, []);
 	function toAddPlace() {
 		navigation.navigate("Add Hotplace");
 	}
@@ -79,10 +65,14 @@ export default function HotPlace({ navigation }) {
 		<View style={styles.container}>
 			<ScrollView contentContainerStyle={{ alignItems: "center", width: 375 }}>
 				<Text style={styles.screenTitle}>My Crowd Point</Text>
-				<Place toQrHotplace={place => toQrHotplace(place)} places={places} />
+				<Place
+					toQrHotplace={place => toQrHotplace(place)}
+					confirmDelete={place => confirmDelete(place)}
+					places={places}
+				/>
 			</ScrollView>
 			<TouchableOpacity
-				// onPress={toAddPlace}
+				onPress={toAddPlace}
 				style={styles.btn}
 				onLongPress={() => alert("button ketteahan")}
 			>

@@ -9,22 +9,24 @@ import {
 	AsyncStorage
 } from "react-native";
 import { BarCodeScanner } from "expo-barcode-scanner";
+import { useSelector } from "react-redux";
 import axios from "axios";
 
 export default function CheckIn() {
 	const [hasPermission, setHasPermission] = useState(null);
 	const [scanned, setScanned] = useState(false);
 	const [BarcodeId, setBarcodeId] = useState(null);
-	const [access_token, set_access_token] = useState(null);
+	// const [access_token, set_access_token] = useState(null);
+	const { access_token } = useSelector(state => state.reducerUser);
 
-	useEffect(() => {
-		AsyncStorage.getItem("access_token", (err, res) => {
-			if (res) {
-				set_access_token(res);
-				alert("dapet" + res);
-			}
-		});
-	}, []);
+	// useEffect(() => {
+	// 	AsyncStorage.getItem("access_token", (err, res) => {
+	// 		if (res) {
+	// 			set_access_token(res);
+	// 			alert("dapet" + res);
+	// 		}
+	// 	});
+	// }, []);
 
 	const showCamera = () => {
 		(async () => {
@@ -42,15 +44,15 @@ export default function CheckIn() {
 		return <Text>No access to camera</Text>;
 	}
 
-	const sendCheckin = QRdata => {
-		// let newQrData = JSON.parse(QRdata);
+	const sendCheckin = BarcodeId => {
 		// alert(QRdata);
 		axios({
 			method: "POST",
-			url: "http://192.168.0.103:3000/checkin",
+			url: "https://vast-woodland-47918.herokuapp.com/checkin",
 			data: {
-				id: 13
-			}
+				id: BarcodeId
+			},
+			headers: { access_token }
 		})
 			.then(result => {
 				alert("success checkin" + JSON.stringify(result.data));
