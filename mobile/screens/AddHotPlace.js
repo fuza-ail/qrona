@@ -47,8 +47,9 @@ export default function Register({ navigation }) {
       // alert(JSON.stringify(data));
       axios({
         method: "post",
-        url: "https://localhost:3000/hotplace",
+        url: "https://vast-woodland-47918.herokuapp.com/hotplace",
         data: data,
+        headers: { access_token },
       })
         .then((res) => {
           alert("Success\n" + JSON.stringify(res.data));

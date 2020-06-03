@@ -1,5 +1,5 @@
 import axios from "axios";
-const mainUrl = "http://192.168.0.103:3000";
+const mainUrl = "https://vast-woodland-47918.herokuapp.com";
 
 export function login(userData) {
   return (dispatch, setState) => {
@@ -9,6 +9,7 @@ export function login(userData) {
       data: userData,
     })
       .then((res) => {
+        console.log(res.data.access_token, "<<< ACTION LOGIN");
         dispatch({ type: "SET_TOKEN", payload: res.data.access_token });
       })
       .catch((err) => {
@@ -18,6 +19,7 @@ export function login(userData) {
 }
 
 export function register(userData) {
+  console.log(userData, "<<<< DATA REGISTER");
   return (dispatch, setState) => {
     axios({
       url: `${mainUrl}/register`,
@@ -25,6 +27,7 @@ export function register(userData) {
       data: userData,
     })
       .then((res) => {
+        console.log(res.data.access_token, "<<< ACTION REGISTER");
         dispatch({ type: "SET_TOKEN", payload: res.data.access_token });
       })
       .catch((err) => {
@@ -34,6 +37,7 @@ export function register(userData) {
 }
 
 export function getUser(token) {
+  console.log("<<< MASUK ACTION", token);
   return (dispatch, setState) => {
     axios({
       url: `${mainUrl}/user`,
@@ -41,6 +45,7 @@ export function getUser(token) {
       headers: { access_token: token },
     })
       .then((res) => {
+        console.log(res.data, "<<< DATA BALIKAN SERVER");
         dispatch({ type: "GET_USER", payload: res.data });
       })
       .catch((err) => {
@@ -61,7 +66,7 @@ export function updateDataUser(updateData, token) {
     })
       .then((res) => {
         console.log(res.data);
-        // dispatch({ type: "PUT_USER", payload: updateData });
+        dispatch({ type: "GET_USER", payload: res.data });
       })
       .catch((err) => {
         console.log(err);

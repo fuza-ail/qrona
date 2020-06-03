@@ -126,7 +126,7 @@ describe('User checkin and out test', () => {
         })
         .then(barcodeData=>{
           userBarcode = barcodeData
-          console.log(userBarcode)
+          // console.log(userBarcode)
           done()
         })
         .catch(error => done(error))

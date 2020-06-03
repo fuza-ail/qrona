@@ -6,7 +6,6 @@ import {
   TouchableOpacity,
   AsyncStorage,
 } from "react-native";
-import axios from "axios";
 
 export default function Place(props) {
   return (

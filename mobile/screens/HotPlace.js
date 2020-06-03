@@ -20,26 +20,10 @@ export default function HotPlace({ navigation }) {
   useEffect(() => {
     dispatch(getPlaces(access_token));
   }, []);
-  // const places = [
-  //   {
-  //     id: 1,
-  //     name: "Mini Market Asyik",
-  //     adress: "5, 48 Pirrama Rd, Pyrmont NSW 2009, Australia",
-  //     // linkQR: "abcdef",
-  //     // imgUrl: "abcdef",
-  //   },
-  //   {
-  //     id: 2,
-  //     name: "Warung Makan Sihuy",
-  //     adress: "5, 48 Pirrama Rd, Pyrmont NSW 2009, Australia",
-  //     // imgUrl: "abcdef",
-  //     // linkQR: "abcdef",
-  //   },
-  // ];
 
   function toQrHotplace(place) {
     axios({
-      url: `http://192.168.0.103:3000/hotplace/${place.id}`,
+      url: `https://vast-woodland-47918.herokuapp.com/hotplace/${place.id}`,
       method: "GET",
       headers: { access_token },
     })
@@ -49,28 +33,6 @@ export default function HotPlace({ navigation }) {
       .catch((err) => alert(err));
   }
 
-  // useEffect(() => {
-  //   AsyncStorage.getItem("access_token", (err, res) => {
-  //     if (res) {
-  //       set_access_token(res);
-  //       alert("dapet" + res);
-  //     }
-  //   });
-  //   axios({
-  //     method: "get",
-  //     url: "http/hotplace",
-  //     headers: { access_token: access_token },
-  //   })
-  //     .then((res) => {
-  //       // alert(res.data);
-  //       // console.log(res.data);
-  //       // setPlaces(res.data);
-  //       dispatch({ type: "GET_PLACES", payload: res.data });
-  //     })
-  //     .catch((err) => {
-  //       alert(err);
-  //     });
-  // }, []);
   function toAddPlace() {
     navigation.navigate("Add Hotplace");
   }

@@ -12,12 +12,32 @@ import { useSelector, useDispatch } from "react-redux";
 import { getUser, updateDataUser } from "../store/actions/actionUser";
 
 export default function Profile(props) {
-  const { access_token, user } = useSelector((state) => state.reducerUser);
+  const { access_token } = useSelector((state) => state.reducerUser);
+  const fetchUser = useSelector((state) => state.reducerUser.user);
   const dispatch = useDispatch();
+  const [user, setUser] = useState(fetchUser);
+  const [isUpdate, setIsUpdate] = useState(false);
+  const [name, setName] = useState(user.name);
+  const [no_ktp, setNo_ktp] = useState(user.no_ktp);
+  const [phone, setPhone] = useState(user.phone);
+  const [address, setAddress] = useState(user.address);
+  const [email, setEmail] = useState(user.email);
 
   useEffect(() => {
     dispatch(getUser(access_token));
   }, []);
+
+  useEffect(() => {
+    setUser(fetchUser);
+  }, [fetchUser]);
+
+  useEffect(() => {
+    setName(user.name);
+    setNo_ktp(user.no_ktp);
+    setPhone(user.phone);
+    setAddress(user.address);
+    setEmail(user.email);
+  }, [user]);
 
   let colorCode;
   let status;
@@ -34,13 +54,6 @@ export default function Profile(props) {
     colorCode = "#46B19C";
     status = "Negatif";
   }
-
-  const [isUpdate, setIsUpdate] = useState(false);
-  const [name, setName] = useState(user.name);
-  const [no_ktp, setNo_ktp] = useState(user.no_ktp);
-  const [phone, setPhone] = useState(user.phone);
-  const [address, setAddress] = useState(user.address);
-  const [email, setEmail] = useState(user.email);
 
   function toUpdate() {
     setIsUpdate(true);
@@ -61,6 +74,9 @@ export default function Profile(props) {
     } else {
       const updateData = { name, phone, address };
       dispatch(updateDataUser(updateData, access_token));
+      // REFETCH
+      setUser({ ...user, ...updateData });
+      dispatch(getUser(access_token));
       setIsUpdate(false);
     }
   }
@@ -72,8 +88,6 @@ export default function Profile(props) {
           contentContainerStyle={{ alignItems: "center", width: 375 }}
         >
           <Text style={styles.screenTitle}>Update Profile</Text>
-          {/* <Text>{JSON.stringify(user)}</Text>
-          <Text>{JSON.stringify(no_ktp)}</Text> */}
           <TextInput
             style={styles.input_disable}
             value={no_ktp}

@@ -21,10 +21,10 @@ export default function Register({ navigation }) {
   const [password, setPassword] = useState("");
   const { notificationToken } = useSelector((state) => state.reducerUser);
 
-  function registerUser() {
+  async function registerUser() {
     // DISPATCH TO REGISTER
-    // let notificationToken = await Notifications.getExpoPushTokenAsync();
-    // console.log(notificationToken, "<<< DARI REGISTER");
+    //let notificationToken = await Notifications.getExpoPushTokenAsync();
+    console.log(notificationToken, "<<< DARI REGISTER");
     if (no_ktp === "") {
       alert("KTP Number Must Filled");
     } else if (email === "") {
@@ -45,7 +45,7 @@ export default function Register({ navigation }) {
         phone,
         address,
         password,
-        // notificationToken,
+        notificationToken,
       };
       dispatch(register(registerData));
       navigation.navigate("TabScreen");
