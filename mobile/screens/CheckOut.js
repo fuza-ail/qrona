@@ -45,7 +45,7 @@ export default function CheckIn() {
     axios({
       method: "PUT",
       headers: { access_token: access_token },
-      url: "https://thawing-plains-96418.herokuapp.com/checkout/13",
+      url: "http://192.168.0.103:3000/checkout/13",
     })
       .then((result) => {
         alert("success checkout" + JSON.stringify(result.data));

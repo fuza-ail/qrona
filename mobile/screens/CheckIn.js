@@ -47,7 +47,7 @@ export default function CheckIn() {
 		// alert(QRdata);
 		axios({
 			method: "POST",
-			url: "https://localhost:3000/checkin",
+			url: "http://192.168.0.103:3000/checkin",
 			data: {
 				id: 13
 			}
@@ -63,18 +63,16 @@ export default function CheckIn() {
 			<ScrollView contentContainerStyle={{ alignItems: "center", width: 375 }}>
 				<Text style={styles.screenTitle}>Check In</Text>
 				<View style={styles.checkin_box}>
-					<View style={styles.camera}>
-						<BarCodeScanner
-							onBarCodeScanned={scanned ? undefined : handleBarCodeScanned}
-							style={StyleSheet.absoluteFillObject}
+					<BarCodeScanner
+						onBarCodeScanned={scanned ? undefined : handleBarCodeScanned}
+						style={styles.camera}
+					/>
+					{scanned && (
+						<Button
+							title={"Tap to Scan Again"}
+							onPress={() => setScanned(false)}
 						/>
-						{scanned && (
-							<Button
-								title={"Tap to Scan Again"}
-								onPress={() => setScanned(false)}
-							/>
-						)}
-					</View>
+					)}
 					<Text style={styles.info}>Scan Hot Place QR you Visit Here</Text>
 				</View>
 			</ScrollView>
@@ -104,12 +102,12 @@ const styles = StyleSheet.create({
 		alignItems: "center",
 		width: 340,
 		height: 366,
-		borderRadius: 5,
-		marginVertical: 25
+		borderRadius: 5
+		// marginVertical: 25,
 	},
 	camera: {
-		backgroundColor: "#fff",
-		width: 310,
+		// backgroundColor: "#fff",
+		width: 600,
 		height: 300,
 		marginHorizontal: 10,
 		marginTop: 15,

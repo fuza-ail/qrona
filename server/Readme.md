@@ -146,17 +146,6 @@
 
 ##### GET /download/:id --> test done
 ###### download the qr
-- Response (200):
-```
-{
-  "id": 157,
-  "name": "gojek amir",
-  "barcode_url": "url gambar si barcode",
-  "HotplaceId": 157,
-  "createdAt": "2020-06-01T11:53:38.934Z",
-  "updatedAt": "2020-06-01T11:53:38.934Z"
-}
-```
 
 
 ##### POST /checkin --> test done

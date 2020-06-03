@@ -1,10 +1,10 @@
 'use strict';
-const {hashPassword} = require('../helpers/bcrypt')
+const { hashPassword } = require('../helpers/bcrypt')
 
 module.exports = (sequelize, DataTypes) => {
   const Sequelize = sequelize.Sequelize;
   const Model = Sequelize.Model;
-  class User extends Model {}
+  class User extends Model { }
 
   User.init({
     no_ktp: {
@@ -38,6 +38,7 @@ module.exports = (sequelize, DataTypes) => {
       }
     },
     status: DataTypes.STRING,
+    notification_token: DataTypes.STRING,
     phone: {
       type: DataTypes.STRING,
       validate: {
@@ -45,21 +46,21 @@ module.exports = (sequelize, DataTypes) => {
       }
     },
     type: DataTypes.STRING
-  },{
+  }, {
     sequelize,
     hooks: {
-      beforeCreate: (user,action)=>{
+      beforeCreate: (user, action) => {
         user.status = 'negatif'
         user.password = hashPassword(user.password)
       }
     }
   })
 
-  User.associate = function(models) {
+  User.associate = function (models) {
     // associations can be defined here
     User.hasMany(models.Hotplace)
     User.hasMany(models.UserBarcode)
-    User.belongsToMany(models.Barcode, {through:models.UserBarcode,foreignKey: 'UserId'})
+    User.belongsToMany(models.Barcode, { through: models.UserBarcode, foreignKey: 'UserId' })
   };
   return User;
 };

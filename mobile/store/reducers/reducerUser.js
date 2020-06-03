@@ -1,5 +1,6 @@
 const initialValue = {
   access_token: "token",
+  notificationToken: "",
   user: {},
 };
 
@@ -11,6 +12,8 @@ function reducerUser(state = initialValue, action) {
       return { ...state, user: action.payload };
     case "PUT_USER":
       return { ...state, user: action.payload };
+    case "SET_NOTIF_TOKEN":
+      return { ...state, notificationToken: action.payload };
     default:
       return state;
   }

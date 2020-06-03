@@ -238,49 +238,49 @@ describe('Barcode test', () => {
     })
   })
 
-  describe('GET /download/:id - download barcode', () => {
-    beforeAll(done => {
-      User.create(userData)
-        .then(user => {
-          userToken = jwt.sign({
-            userId: user.id,
-            userEmail: user.email
-          }, process.env.TOKEN_KEY)
-          userId = user.id
-          return Hotplace.create(hotPlace)
-        })
-        .then(hotplace => {
-          userHotPlace = hotplace
-          return Barcode.create({
-            name: hotplace.name,
-            barcode_url: 'google.com',
-            HotplaceId: hotplace.id
-          })
-        })
-        .then(barcode => {
-          hotplaceBarcode = barcode
-          done()
-        })
-        .catch(error => done(error))
-    })
-    afterAll(done => {
-      queryInterface
-        .bulkDelete('Users', {})
-        .then(() => queryInterface.bulkDelete('Hotplaces', {}))
-        .then(() => queryInterface.bulkDelete('Barcodes',{}))
-        .then(() => done())
-        .catch(error => done(error))
-    })
+  // describe('GET /download/:id - download barcode', () => {
+  //   beforeAll(done => {
+  //     User.create(userData)
+  //       .then(user => {
+  //         userToken = jwt.sign({
+  //           userId: user.id,
+  //           userEmail: user.email
+  //         }, process.env.TOKEN_KEY)
+  //         userId = user.id
+  //         return Hotplace.create(hotPlace)
+  //       })
+  //       .then(hotplace => {
+  //         userHotPlace = hotplace
+  //         return Barcode.create({
+  //           name: hotplace.name,
+  //           barcode_url: 'google.com',
+  //           HotplaceId: hotplace.id
+  //         })
+  //       })
+  //       .then(barcode => {
+  //         hotplaceBarcode = barcode
+  //         done()
+  //       })
+  //       .catch(error => done(error))
+  //   })
+  //   afterAll(done => {
+  //     queryInterface
+  //       .bulkDelete('Users', {})
+  //       .then(() => queryInterface.bulkDelete('Hotplaces', {}))
+  //       .then(() => queryInterface.bulkDelete('Barcodes',{}))
+  //       .then(() => done())
+  //       .catch(error => done(error))
+  //   })
 
-    test('200 succes deleted hotplace by id', (done) => {
-      request(app)
-        .get('/hotplace/'+hotplaceBarcode.id)
-        .set('access_token', userToken)
-        .then(response => {
-          const { body, status } = response;
-          expect(status).toBe(200);
-          done()
-        })
-    })
-  })
+  //   test('200 succes deleted hotplace by id', (done) => {
+  //     request(app)
+  //       .get('/hotplace/'+hotplaceBarcode.id)
+  //       .set('access_token', userToken)
+  //       .then(response => {
+  //         const { body, status } = response;
+  //         expect(status).toBe(200);
+  //         done()
+  //       })
+  //   })
+  // })
 })

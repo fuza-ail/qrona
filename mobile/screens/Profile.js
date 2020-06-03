@@ -61,8 +61,6 @@ export default function Profile(props) {
     } else {
       const updateData = { name, phone, address };
       dispatch(updateDataUser(updateData, access_token));
-      // REFETCH
-      // dispatch(getUser(access_token));
       setIsUpdate(false);
     }
   }

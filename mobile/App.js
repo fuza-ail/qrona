@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { StyleSheet, Text, View } from "react-native";
 import { NavigationContainer } from "@react-navigation/native";
 import { createStackNavigator } from "@react-navigation/stack";
@@ -57,7 +57,6 @@ function TabScreen() {
   return (
     <Tab.Navigator
       screenOptions={({ route }) => ({
-        tabBarColor: "#B3EFDD",
         tabBarIcon: ({ focused, color, size }) => {
           let iconName;
 
@@ -76,6 +75,9 @@ function TabScreen() {
         },
       })}
       tabBarOptions={{
+        style: {
+          backgroundColor: "#B3EFDD",
+        },
         activeTintColor: "#097C54",
         inactiveTintColor: "#00B979",
       }}
