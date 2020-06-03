@@ -44,18 +44,18 @@ export default function CheckIn() {
 
 	const sendCheckin = QRdata => {
 		// let newQrData = JSON.parse(QRdata);
-		alert(QRdata);
-		// axios({
-		// 	method: "POST",
-		// 	url: "https://thawing-plains-96418.herokuapp.com/checkin",
-		// 	data: {
-		// 		id: 13
-		// 	}
-		// })
-		// 	.then(result => {
-		// 		alert("success checkin" + JSON.stringify(result.data));
-		// 	})
-		// 	.catch(err => alert(err));
+		// alert(QRdata);
+		axios({
+			method: "POST",
+			url: "https://thawing-plains-96418.herokuapp.com/checkin",
+			data: {
+				id: 13
+			}
+		})
+			.then(result => {
+				alert("success checkin" + JSON.stringify(result.data));
+			})
+			.catch(err => alert(err));
 	};
 
 	return (

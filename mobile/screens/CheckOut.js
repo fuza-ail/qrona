@@ -42,21 +42,15 @@ export default function CheckIn() {
 	}
 
 	const sendCheckout = QRdata => {
-		// let newQrData = JSON.parse(QRdata);
-		alert(QRdata);
-
-		// axios({
-		// 	method: "POST",
-		// 	headers: { access_token: access_token },
-		// 	url: "https://thawing-plains-96418.herokuapp.com/checkout",
-		// 	data: {
-		// 		id: 13
-		// 	}
-		// })
-		// 	.then(result => {
-		// 		// alert("success checkout" + JSON.stringify(result.data));
-		// 	})
-		// 	.catch(err => alert(err));
+		axios({
+			method: "PUT",
+			headers: { access_token: access_token },
+			url: "https://thawing-plains-96418.herokuapp.com/checkout/13"
+		})
+			.then(result => {
+				alert("success checkout" + JSON.stringify(result.data));
+			})
+			.catch(err => alert(err));
 	};
 	return (
 		<View style={styles.container}>
