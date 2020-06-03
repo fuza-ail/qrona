@@ -8,14 +8,16 @@ import {
   AsyncStorage,
   Button,
 } from "react-native";
+import { useSelector } from "react-redux";
 import { BarCodeScanner } from "expo-barcode-scanner";
 import axios from "axios";
 
 export default function CheckIn() {
+  const { access_token } = useSelector((state) => state.reducerUser);
   const [hasPermission, setHasPermission] = useState(null);
   const [scanned, setScanned] = useState(false);
   const [BarcodeId, setBarcodeId] = useState(null);
-  const [access_token, set_access_token] = useState(null);
+  // const [access_token, set_access_token] = useState(null);
 
   useEffect(() => {
     AsyncStorage.getItem("access_token", (err, res) => {
@@ -44,8 +46,8 @@ export default function CheckIn() {
   const sendCheckout = (QRdata) => {
     axios({
       method: "PUT",
-      headers: { access_token: access_token },
-      url: "http://192.168.0.103:3000/checkout/13",
+      headers: { access_token },
+      url: `https://vast-woodland-47918.herokuapp.com/checkout/${QRdata}`,
     })
       .then((result) => {
         alert("success checkout" + JSON.stringify(result.data));

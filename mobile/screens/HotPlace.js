@@ -5,7 +5,6 @@ import {
   View,
   ScrollView,
   TouchableOpacity,
-  AsyncStorage,
 } from "react-native";
 import Place from "../components/Place";
 import { useSelector, useDispatch } from "react-redux";
@@ -43,7 +42,11 @@ export default function HotPlace({ navigation }) {
         <Text style={styles.screenTitle}>My Crowd Point</Text>
         <Place toQrHotplace={(place) => toQrHotplace(place)} places={places} />
       </ScrollView>
-      <TouchableOpacity onPress={toAddPlace} style={styles.btn}>
+      <TouchableOpacity
+        onPress={toAddPlace}
+        style={styles.btn}
+        onLongPress={() => alert("button ketteahan")}
+      >
         <Text style={styles.btn_text}>Add Crowd Point</Text>
       </TouchableOpacity>
     </View>
