@@ -1,30 +1,28 @@
 import React from "react";
 import { StyleSheet, Text, View } from "react-native";
 
-export default function StatusCard(props) {
+export default function StatusUser(props) {
   return (
     <View style={styles.container}>
+      <Text style={styles.stat_title}>Status</Text>
       <View
         style={{
           backgroundColor: props.colorCode,
-          width: 320,
-          marginTop: 60,
+          width: 100,
+          alignItems: "center",
           borderRadius: 5,
           borderBottomColor:
-            props.status == "Siaga!"
+            props.status == "OTG"
               ? "orange"
-              : props.status == "Waspada!"
+              : props.status == "ODP"
               ? "yellow"
-              : props.status == "Awas!"
+              : props.status == "Positif"
               ? "red"
-              : props.status == "Aman"
-              ? "green"
-              : "#00B979",
+              : "green",
           borderBottomWidth: 3,
         }}
       >
-        <Text style={styles.heading}>Anda berada di zona {props.status}</Text>
-        <Text style={styles.description}>{props.description}</Text>
+        <Text style={styles.status}>{props.status}</Text>
       </View>
     </View>
   );
@@ -32,14 +30,16 @@ export default function StatusCard(props) {
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
-    width: 375,
     alignItems: "center",
-    backgroundColor: "#65DCB8",
+    marginTop: 15,
   },
-  heading: {
+  stat_title: {
     fontSize: 16,
-    marginVertical: 20,
+    color: "#46B19C",
+    marginBottom: 10,
+  },
+  status: {
+    marginVertical: 10,
     textAlign: "center",
     color: "#566573",
     fontWeight: "bold",
