@@ -5,7 +5,8 @@ require('dotenv').config();
 const { Op } = require('sequelize');
 const Moment = require('moment');
 const { extendMoment } = require('moment-range');
-let moment = extendMoment(Moment)
+let moment = extendMoment(Moment);
+const fetch = require('node-fetch');
 
 class ControllerAdmin {
 
