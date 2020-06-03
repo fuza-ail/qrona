@@ -8,32 +8,43 @@ import {
   ScrollView,
   KeyboardAvoidingView,
 } from "react-native";
+import { useDispatch } from "react-redux";
+import { register } from "../store/actions/actionUser";
 
 export default function Register({ navigation }) {
-  const [name, setName] = useState("");
+  const dispatch = useDispatch();
   const [no_ktp, setNo_ktp] = useState("");
-  const [phone, setPhone] = useState("");
-  const [adress, setAdress] = useState("");
   const [email, setEmail] = useState("");
+  const [name, setName] = useState("");
+  const [phone, setPhone] = useState("");
+  const [address, setAddress] = useState("");
   const [password, setPassword] = useState("");
 
-  function register() {
+  function registerUser() {
     // DISPATCH TO REGISTER
-    navigation.navigate("Login");
+    if (no_ktp === "") {
+      alert("KTP Number Must Filled");
+    } else if (email === "") {
+      alert("Email Must Filled");
+    } else if (name === "") {
+      alert("Name Must Filled");
+    } else if (phone === "") {
+      alert("Phone Must Filled");
+    } else if (address === "") {
+      alert("Address Must Filled");
+    } else if (password === "") {
+      alert("Password Must Filled");
+    } else {
+      const registerData = { no_ktp, email, name, phone, address, password };
+      dispatch(register(registerData));
+      navigation.navigate("TabScreen");
+    }
   }
 
   return (
     <KeyboardAvoidingView style={styles.container} behavior="padding">
       <ScrollView contentContainerStyle={{ alignItems: "center", width: 375 }}>
         <Text style={styles.screenTitle}>Registration Form</Text>
-        <TextInput
-          style={styles.input}
-          onChangeText={(text) => setName(text)}
-          value={name}
-          placeholder="Enter Name"
-          placeholderTextColor="#46B19C"
-          autoCorrect={false}
-        />
         <TextInput
           style={styles.input}
           onChangeText={(text) => setNo_ktp(text)}
@@ -44,6 +55,23 @@ export default function Register({ navigation }) {
           placeholder="Enter KTP Number"
           placeholderTextColor="#46B19C"
           autoCapitalize="none"
+          autoCorrect={false}
+        />
+        <TextInput
+          style={styles.input}
+          onChangeText={(text) => setEmail(text)}
+          value={email}
+          placeholder="Enter Email"
+          placeholderTextColor="#46B19C"
+          autoCapitalize="none"
+          autoCorrect={false}
+        />
+        <TextInput
+          style={styles.input}
+          onChangeText={(text) => setName(text)}
+          value={name}
+          placeholder="Enter Name"
+          placeholderTextColor="#46B19C"
           autoCorrect={false}
         />
         <TextInput
@@ -60,21 +88,13 @@ export default function Register({ navigation }) {
         />
         <TextInput
           style={styles.input}
-          onChangeText={(text) => setAdress(text)}
-          value={adress}
-          placeholder="Enter Adress"
+          onChangeText={(text) => setAddress(text)}
+          value={address}
+          placeholder="Enter Address"
           placeholderTextColor="#46B19C"
           autoCorrect={false}
         />
-        <TextInput
-          style={styles.input}
-          onChangeText={(text) => setEmail(text)}
-          value={email}
-          placeholder="Enter Email"
-          placeholderTextColor="#46B19C"
-          autoCapitalize="none"
-          autoCorrect={false}
-        />
+
         <TextInput
           style={styles.input}
           onChangeText={(text) => setPassword(text)}
@@ -85,7 +105,7 @@ export default function Register({ navigation }) {
           autoCapitalize="none"
           autoCorrect={false}
         />
-        <TouchableOpacity onPress={register} style={styles.btn}>
+        <TouchableOpacity onPress={registerUser} style={styles.btn}>
           <Text style={styles.btn_text}>Register</Text>
         </TouchableOpacity>
         <TouchableOpacity
@@ -108,7 +128,7 @@ const styles = StyleSheet.create({
   screenTitle: {
     fontSize: 24,
     fontWeight: "bold",
-    color: "#00B979",
+    color: "#097C54",
     marginTop: 60,
   },
   input: {

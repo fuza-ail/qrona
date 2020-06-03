@@ -7,21 +7,39 @@ import {
   TouchableOpacity,
   ScrollView,
 } from "react-native";
+import StatusUSer from "../components/StatusUser";
+import { useSelector, useDispatch } from "react-redux";
+import { getUser, updateDataUser } from "../store/actions/actionUser";
 
 export default function Profile(props) {
-  const user = {
-    name: "Hamzah Abdullah Mubarak",
-    no_ktp: "1234567890123456",
-    phone: "123456789012",
-    adress: "5, 48 Pirrama Rd, Pyrmont NSW 2009, AUS",
-    email: "hamzah@mail.com",
-  };
+  const { access_token, user } = useSelector((state) => state.reducerUser);
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch(getUser(access_token));
+  }, []);
+
+  let colorCode;
+  let status;
+  if (user.status === "positif") {
+    colorCode = "#FFA69D";
+    status = "Positif";
+  } else if (user.status === "OTG") {
+    colorCode = "#FFC3A0";
+    status = "OTG";
+  } else if (user.status === "ODP") {
+    colorCode = "#FFF2AF";
+    status = "ODP";
+  } else {
+    colorCode = "#46B19C";
+    status = "Negatif";
+  }
 
   const [isUpdate, setIsUpdate] = useState(false);
   const [name, setName] = useState(user.name);
   const [no_ktp, setNo_ktp] = useState(user.no_ktp);
   const [phone, setPhone] = useState(user.phone);
-  const [adress, setAdress] = useState(user.adress);
+  const [address, setAddress] = useState(user.address);
   const [email, setEmail] = useState(user.email);
 
   function toUpdate() {
@@ -34,7 +52,19 @@ export default function Profile(props) {
 
   function updateUser() {
     // DISPATCH TO UPDATE
-    setIsUpdate(false);
+    if (name === "") {
+      alert("Name Must Filled");
+    } else if (phone === "") {
+      alert("Phone Must Filled");
+    } else if (address === "") {
+      alert("Address Must Filled");
+    } else {
+      const updateData = { name, phone, address };
+      dispatch(updateDataUser(updateData, access_token));
+      // REFETCH
+      // dispatch(getUser(access_token));
+      setIsUpdate(false);
+    }
   }
 
   if (isUpdate) {
@@ -44,24 +74,24 @@ export default function Profile(props) {
           contentContainerStyle={{ alignItems: "center", width: 375 }}
         >
           <Text style={styles.screenTitle}>Update Profile</Text>
+          {/* <Text>{JSON.stringify(user)}</Text>
+          <Text>{JSON.stringify(no_ktp)}</Text> */}
+          <TextInput
+            style={styles.input_disable}
+            value={no_ktp}
+            editable={false}
+          />
+          <TextInput
+            style={styles.input_disable}
+            value={email}
+            editable={false}
+          />
           <TextInput
             style={styles.input}
             onChangeText={(text) => setName(text)}
             value={name}
             placeholder="Enter Name"
             placeholderTextColor="#46B19C"
-            autoCorrect={false}
-          />
-          <TextInput
-            style={styles.input}
-            onChangeText={(text) => setNo_ktp(text)}
-            value={no_ktp}
-            keyboardType="numeric"
-            minLength={16}
-            maxLength={16}
-            placeholder="Enter KTP Number"
-            placeholderTextColor="#46B19C"
-            autoCapitalize="none"
             autoCorrect={false}
           />
           <TextInput
@@ -78,19 +108,10 @@ export default function Profile(props) {
           />
           <TextInput
             style={styles.input}
-            onChangeText={(text) => setAdress(text)}
-            value={adress}
-            placeholder="Enter Adress"
+            onChangeText={(text) => setAddress(text)}
+            value={address}
+            placeholder="Enter Address"
             placeholderTextColor="#46B19C"
-            autoCorrect={false}
-          />
-          <TextInput
-            style={styles.input}
-            onChangeText={(text) => setEmail(text)}
-            value={email}
-            placeholder="Enter Email"
-            placeholderTextColor="#46B19C"
-            autoCapitalize="none"
             autoCorrect={false}
           />
         </ScrollView>
@@ -107,26 +128,25 @@ export default function Profile(props) {
   return (
     <View style={styles.container}>
       <ScrollView contentContainerStyle={{ alignItems: "center", width: 375 }}>
-        <Text style={styles.screenTitle}>Profile</Text>
-        <Text style={styles.prof_title}>Name</Text>
-        <View style={styles.prof_box}>
-          <Text style={styles.prof_value}>{user.name}</Text>
+        <Text style={styles.screenTitle}>{user.name}</Text>
+        <View style={styles.status}>
+          <StatusUSer status={status} colorCode={colorCode} />
         </View>
         <Text style={styles.prof_title}>KTP Number</Text>
         <View style={styles.prof_box}>
           <Text style={styles.prof_value}>{user.no_ktp}</Text>
         </View>
-        <Text style={styles.prof_title}>Phone Number</Text>
-        <View style={styles.prof_box}>
-          <Text style={styles.prof_value}>{user.phone}</Text>
-        </View>
-        <Text style={styles.prof_title}>Adress</Text>
-        <View style={styles.prof_box}>
-          <Text style={styles.prof_value}>{user.adress}</Text>
-        </View>
         <Text style={styles.prof_title}>Email</Text>
         <View style={styles.prof_box}>
           <Text style={styles.prof_value}>{user.email}</Text>
+        </View>
+        <Text style={styles.prof_title}>Phone</Text>
+        <View style={styles.prof_box}>
+          <Text style={styles.prof_value}>{user.phone}</Text>
+        </View>
+        <Text style={styles.prof_title}>Address</Text>
+        <View style={styles.prof_box}>
+          <Text style={styles.prof_value}>{user.address}</Text>
         </View>
       </ScrollView>
       <TouchableOpacity onPress={toUpdate} style={styles.btn}>
@@ -145,10 +165,19 @@ const styles = StyleSheet.create({
   screenTitle: {
     fontSize: 24,
     fontWeight: "bold",
-    color: "#00B979",
+    color: "#097C54",
     marginTop: 60,
   },
   input: {
+    backgroundColor: "#DEDEDE",
+    color: "#46B19C",
+    width: 320,
+    padding: 10,
+    borderRadius: 5,
+    marginTop: 25,
+    paddingHorizontal: 20,
+  },
+  input_disable: {
     backgroundColor: "#B3EFDD",
     color: "#46B19C",
     width: 320,
@@ -159,8 +188,9 @@ const styles = StyleSheet.create({
   },
   prof_title: {
     fontSize: 16,
-    color: "#46B19C",
-    marginVertical: 10,
+    color: "#097C54",
+    marginTop: 15,
+    marginBottom: 10,
   },
   prof_box: {
     width: 320,

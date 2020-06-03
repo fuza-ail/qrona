@@ -10,29 +10,23 @@ import {
 import { QRCode } from "react-native-custom-qr-codes";
 
 export default function QrHotplace({ route }) {
-	useEffect(() => {
-		alert(JSON.stringify(route.params));
-	}, []);
-	const name = route.params.detail.name;
+	// useEffect(() => {
+	//   alert(JSON.stringify(route.params));
+	// }, []);
+	// const name = route.params.detail.name;
+	const { place } = route.params;
 	return (
 		<View style={styles.container}>
 			<ScrollView contentContainerStyle={{ alignItems: "center", width: 375 }}>
-				<Text style={styles.screenTitle}>{name}</Text>
+				<Text style={styles.screenTitle}>{place.name}</Text>
+				{/* <Text>{JSON.stringify(place)}</Text> */}
 				<View style={styles.qr_box}>
 					<View style={styles.qr_code}>
-						{/* <Image
+						<Image
 							style={{ width: 300, height: 300 }}
 							source={{
-								uri: route.params.detail.barcode_url
+								uri: place.barcode_url
 							}}
-						/> */}
-						<QRCode
-							content={route.params.detail.id + ""}
-							codeStyle="circle"
-							outerEyeStyle="square"
-							innerEyeStyle="diamond"
-							logoSize="25"
-							logo={require("../assets/qricon.png")}
 						/>
 					</View>
 					<Text style={styles.info}>
@@ -56,7 +50,7 @@ const styles = StyleSheet.create({
 	screenTitle: {
 		fontSize: 24,
 		fontWeight: "bold",
-		color: "#00B979",
+		color: "#097C54",
 		marginTop: 60
 	},
 	qr_box: {
