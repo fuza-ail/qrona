@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from 'react';
-import ViewTable from '../components/table'
 import { useSelector, useDispatch } from 'react-redux'
 import { Form, Table } from 'react-bootstrap'
 import { getUsers } from '../store/actions/usersActions'
@@ -27,11 +26,10 @@ function UserTable() {
     return <div style={{ width: '85vw' }}>
 
         <div style={{ display: 'flex', justifyContent: 'space-between', margin: 12 }}>
-            <p style={{ color: '#00B979', fontSize: 24, marginBottom: 0 }}>Users Data</p>
+            <p style={{ color: '#00B979', fontSize: 24, marginBottom: 0 }}>Users</p>
             <Form.Control type="text" placeholder="Search KTP" onChange={e => setSearchKTP(e.target.value)} style={{ width: '30%' }} />
         </div>
 
-        {/* <ViewTable users={searchUsers} /> */}
         <Table>
             <thead style={{ color: '#00B979' }}>
                 <tr>
@@ -41,19 +39,17 @@ function UserTable() {
                     <th>Contact</th>
                     <th>Email</th>
                     <th>Status</th>
-                    <th>Details</th>
                 </tr>
             </thead>
             <tbody style={{ color: '#46B19C' }}>
                 {searchUsers.map(user => {
                     return <tr key={user.id}>
                         <td> {user.no_ktp} </td>
-                        <td> {user.name} </td>
+                        <td> <Link to={'/users/' + user.id} style={{ color: '#46B19C', fontWeight: 'bold' }}>{user.name} </Link></td>
                         <td> {user.address} </td>
                         <td> {user.phone} </td>
                         <td> {user.email} </td>
                         <td> {user.status} </td>
-                        <td> <Link to={'/users/' + user.id}>Detail</Link></td>
                     </tr>
                 })}
             </tbody>

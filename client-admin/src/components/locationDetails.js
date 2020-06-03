@@ -1,9 +1,14 @@
 import React, { useState, useEffect } from 'react';
 import { useParams, Link } from 'react-router-dom'
-import { Table } from 'react-bootstrap'
+import { Table, Card } from 'react-bootstrap'
 import axios from 'axios'
 import url from '../url'
 import moment from 'moment'
+
+
+//for template
+import logo from '../logo.png'
+
 
 function LocationDetail() {
 
@@ -30,15 +35,21 @@ function LocationDetail() {
 
 
 
-    return <div style={{ width: '85vw', display: 'flex' }}>
+    return <div style={{ width: '85vw', display: 'flex', marginTop: '20px' }}>
         <div style={{ flex: '1', }}>
-            <div style={{ marginLeft: '10%', marginTop: '2%' }}>
-                <h1>Name: {data.name}</h1>
-                <h2>Type: {data.type}</h2>
-                <h5>Address: {data.address}</h5>
-                <h5>Contact: {data.phone}</h5>
-                <img src={data.Barcode.barcode_url} alt="QR Code" width="200" height="200"></img>
-            </div>
+            <Card style={{ width: 'auto' }}>
+                {/* <Card.Img variant="top" src="holder.js/100px180" /> */}
+                <Card.Body style={{ paddingRight: '15%', paddingLeft: '15%', color: '#46B19C', paddingBottom: '10%' }}>
+                    <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', paddingTop: '10%' }}>
+                        <img src={logo} alt="QR Code, data.Barcode.barcode_url" width="200" height="200" style={{ alignSelf: 'center' }}></img>
+                    </div>
+                    <Card.Title style={{ textAlign: 'center', fontSize: '30px', paddingTop: '10%', paddingBottom: '10%' }}>{data.name}</Card.Title>
+                    <Card.Text style={{ fontWeight: 'bold' }}>Status: {data.status}</Card.Text>
+                    <Card.Text>KTP: {data.no_ktp}</Card.Text>
+                    <Card.Text>Address: {data.address}</Card.Text>
+                    <Card.Text>Status: {data.phone}</Card.Text>
+                </Card.Body>
+            </Card>
         </div>
 
         <div style={{ flex: '3' }}>
@@ -54,7 +65,7 @@ function LocationDetail() {
                 <tbody style={{ color: '#46B19C' }}>
                     {data.Barcode.UserBarcodes.map((user, idx) => {
                         return <tr key={idx}>
-                            <td>  <Link to={'/users/' + user.User.id}>{user.User.name}</Link> </td>
+                            <td>  <Link to={'/users/' + user.User.id} style={{ color: '#46B19C', fontWeight: 'bold' }} >{user.User.name}</Link> </td>
                             <td> {user.User.no_ktp} </td>
                             <td> {moment(user.checkin).format('MMMM Do YYYY, h:mm:ss a')} </td>
                             <td> {moment(user.checkout).format('MMMM Do YYYY, h:mm:ss a')} </td>
@@ -62,8 +73,8 @@ function LocationDetail() {
                     })}
                 </tbody>
             </Table>
-            {JSON.stringify(data)}
         </div>
+
 
 
     </div>

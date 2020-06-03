@@ -21,8 +21,8 @@ function Dashboard() {
 
 
         <h1 style={{ padding: 20, color: '#00B979' }}>DashBoard</h1>
-        <div style={{ display: 'flex', alignItems: 'center', width: '100%', justifyContent: 'center' }}>
-            <Link to={'/'}>User Data</Link> &nbsp; |  &nbsp; <Link to={'/locations'}>Locations Data</Link>
+        <div style={{ display: 'flex', alignItems: 'center', width: '100%', justifyContent: 'center', color: '#65DCB8' }}>
+            <Link to={'/'} style={{ color: '#ec586e' }}>Users</Link> &nbsp; |  &nbsp; <Link to={'/locations'} style={{ color: '#ec586e' }}>Crowd Points</Link>
         </div>
 
 

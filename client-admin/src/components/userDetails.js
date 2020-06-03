@@ -1,9 +1,16 @@
 import React, { useState, useEffect } from 'react';
-import { Button, Form, Table } from 'react-bootstrap'
+import { Button, Form, Table, Modal, Card } from 'react-bootstrap'
 import { useParams, Link } from 'react-router-dom'
 import axios from 'axios'
 import url from '../url'
 import moment from 'moment'
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+
+
+//for template
+import logo from '../logo.png'
+
 
 function UserDetail() {
 
@@ -11,6 +18,7 @@ function UserDetail() {
     const [loading, setLoading] = useState(true)
     const [status, setStatus] = useState('')
     const [showForm, setShowForm] = useState(false)
+    const [showModal, setShowModal] = useState({ show: false, url: '' });
     let { userId } = useParams()
 
     moment.locale('en-sg')
@@ -36,6 +44,15 @@ function UserDetail() {
             let newData = { ...data, status }
             setData(newData)
             setShowForm(false)
+            toast.success('Status Successfully Updated', {
+                position: "top-right",
+                autoClose: 3000,
+                hideProgressBar: true,
+                closeOnClick: true,
+                pauseOnHover: true,
+                draggable: true,
+                progress: undefined,
+            });
         })
     }
 
@@ -44,27 +61,28 @@ function UserDetail() {
     }
 
 
-    return <div style={{ width: '85vw', display: 'flex' }}>
+    return <div style={{ width: '85vw', display: 'flex', marginTop: '20px' }}>
         <div style={{ flex: '1', }}>
-            <div style={{ marginLeft: '10%', marginTop: '2%' }}>
-                <h1>Name: {data.name}</h1>
-                <h2>Status: {data.status}</h2>
-                <h5>KTP: {data.no_ktp}</h5>
-                <h5>Address: {data.address}</h5>
-                <h5>Contact: {data.phone}</h5>
-
-                {showForm ?
-                    <div>
-                        <Form.Control placeholder="Status" value={status} onChange={(e) => setStatus(e.target.value)} as="select">
-                            <option value="negatif">Negatif</option>
-                            <option value="positif">Positif</option>
-                            <option value="OTG"> OTG</option>
-                        </Form.Control>
-                        <Button onClick={updateStatus}>Confirm</Button>
-                        <Button onClick={() => { setShowForm(false); setStatus(data.status) }}>Cancel</Button> </div> :
-                    <Button onClick={() => setShowForm(true)}>Change Status</Button>
-                }
-            </div>
+            <Card style={{ width: 'auto' }}>
+                <Card.Body style={{ paddingRight: '15%', paddingLeft: '15%', color: '#46B19C', paddingBottom: '10%' }}>
+                    <Card.Title style={{ textAlign: 'center', fontSize: '30px', paddingTop: '10%', paddingBottom: '10%' }}>{data.name}</Card.Title>
+                    <Card.Text style={{ fontWeight: 'bold' }}>Status: {data.status}</Card.Text>
+                    <Card.Text>KTP: {data.no_ktp}</Card.Text>
+                    <Card.Text>Address: {data.address}</Card.Text>
+                    <Card.Text>Status: {data.phone}</Card.Text>
+                    {showForm ?
+                        <div>
+                            <Form.Control placeholder="Status" value={status} onChange={(e) => setStatus(e.target.value)} as="select" style={{ marginBottom: '10px' }}>
+                                <option value="negatif">Negatif</option>
+                                <option value="positif">Positif</option>
+                                <option value="OTG"> OTG</option>
+                            </Form.Control>
+                            <Button variant="light" style={{ color: 'white', backgroundColor: '#ec586e', marginRight: '5px' }} onClick={updateStatus}>Confirm</Button>
+                            <Button variant="warning" onClick={() => { setShowForm(false); setStatus(data.status) }}>Cancel</Button> </div> :
+                        <Button variant="light" style={{ color: 'white', backgroundColor: '#ec586e' }} onClick={() => setShowForm(true)}>Change Status</Button>
+                    }
+                </Card.Body>
+            </Card>
         </div>
 
         <div style={{ flex: '3' }}>
@@ -72,26 +90,41 @@ function UserDetail() {
                 <thead style={{ color: '#00B979' }}>
                     <tr>
                         <th>QR Code</th>
-                        <th>Location Name</th>
-                        <th>Location Type</th>
+                        <th>Crowd Point</th>
+                        <th>Point Type</th>
                         <th>Check In</th>
                         <th>Check Out</th>
                     </tr>
                 </thead>
                 <tbody style={{ color: '#46B19C' }}>
                     {data.UserBarcodes.map(barcode => {
-                        return <tr key={barcode.checkin}>
-                            <td>  <img src={barcode.Barcode.barcode_url} alt="QR Code" width="100" height="100"></img></td>
-                            <td>  <Link to={'/locations/' + barcode.Barcode.Hotplace.id}>{barcode.Barcode.Hotplace.name}</Link> </td>
-                            <td> {barcode.Barcode.Hotplace.type} </td>
-                            <td> {moment(barcode.checkin).format('MMMM Do YYYY, h:mm:ss a')} </td>
-                            <td> {moment(barcode.checkout).format('MMMM Do YYYY, h:mm:ss a')} </td>
+                        return <tr key={barcode.checkin} >
+                            <td style={{ verticalAlign: 'middle' }}>  <img src={logo} alt="QR Code, barcode.Barcode.barcode_url" width="50" height="50" onClick={() => setShowModal({ show: true, url: logo })} style={{ cursor: 'pointer' }}></img></td>
+                            <td style={{ verticalAlign: 'middle' }}>  <Link to={'/locations/' + barcode.Barcode.Hotplace.id} style={{ color: '#46B19C', fontWeight: 'bold' }}>{barcode.Barcode.Hotplace.name}</Link> </td>
+                            <td style={{ verticalAlign: 'middle' }}> {barcode.Barcode.Hotplace.type} </td>
+                            <td style={{ verticalAlign: 'middle' }}> {moment(barcode.checkin).format('MMMM Do YYYY, h:mm:ss a')} </td>
+                            <td style={{ verticalAlign: 'middle' }}> {moment(barcode.checkout).format('MMMM Do YYYY, h:mm:ss a')} </td>
                         </tr>
                     })}
                 </tbody>
             </Table>
-            {JSON.stringify(data)}
         </div>
+
+        <Modal show={showModal.show} onHide={() => setShowModal({ show: false, url: '' })} >
+            <img src={showModal.url} alt="QR Code, barcode.Barcode.barcode_url" width="500" height="500"></img>
+        </Modal>
+
+        <ToastContainer
+            position="top-right"
+            autoClose={3000}
+            hideProgressBar
+            newestOnTop={false}
+            closeOnClick
+            rtl={false}
+            pauseOnFocusLoss
+            draggable
+            pauseOnHover
+        />
 
 
     </div>

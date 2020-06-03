@@ -29,8 +29,8 @@ function LocationTable() {
     return <div style={{ width: '85vw' }}>
 
         <div style={{ display: 'flex', justifyContent: 'space-between', margin: 12 }}>
-            <p style={{ color: '#00B979', fontSize: 24, marginBottom: 0 }}>Locations Data</p>
-            <Form.Control type="text" placeholder="Search Hotplace" onChange={e => setName(e.target.value)} style={{ width: '30%' }} />
+            <p style={{ color: '#00B979', fontSize: 24, marginBottom: 0 }}>Crowd Points</p>
+            <Form.Control type="text" placeholder="Search Crowd Point" onChange={e => setName(e.target.value)} style={{ width: '30%' }} />
         </div>
 
 
@@ -43,18 +43,17 @@ function LocationTable() {
                     <th>Phone</th>
                     <th>Type</th>
                     <th>Created By</th>
-                    <th>Details</th>
                 </tr>
             </thead>
             <tbody style={{ color: '#46B19C' }}>
                 {searchLocation.map(location => {
                     return <tr key={location.id}>
-                        <td> {location.name} </td>
+                        <td> <Link to={'/locations/' + location.id} style={{ color: '#46B19C', fontWeight: 'bold' }}>{location.name}</Link></td>
                         <td> {location.address} </td>
                         <td> {location.phone} </td>
                         <td> {location.type} </td>
-                        <td> {location.User ? <Link to={'/users/' + location.User.id}>{location.User.name}</Link> : 'N/A'} </td>
-                        <td> <Link to={'/locations/' + location.id}>Detail</Link></td>
+                        <td> {location.User ? <Link to={'/users/' + location.User.id} style={{ color: '#ec586e' }}>{location.User.name}</Link> : 'N/A'} </td>
+
                     </tr>
                 })}
             </tbody>
