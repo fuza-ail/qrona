@@ -11,7 +11,7 @@ export function getPlaces(token) {
       },
     })
       .then((res) => {
-        console.log(res.data);
+        // console.log(res.data);
         dispatch({ type: "GET_PLACES", payload: res.data });
       })
       .catch((err) => {

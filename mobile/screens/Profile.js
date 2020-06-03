@@ -74,15 +74,15 @@ export default function Profile(props) {
           contentContainerStyle={{ alignItems: "center", width: 375 }}
         >
           <Text style={styles.screenTitle}>Update Profile</Text>
+          {/* <Text>{JSON.stringify(user)}</Text>
+          <Text>{JSON.stringify(no_ktp)}</Text> */}
           <TextInput
-            style={styles.input}
-            onChangeText={(text) => setNo_ktp(text)}
+            style={styles.input_disable}
             value={no_ktp}
             editable={false}
           />
           <TextInput
-            style={styles.input}
-            onChangeText={(text) => setEmail(text)}
+            style={styles.input_disable}
             value={email}
             editable={false}
           />
@@ -165,10 +165,19 @@ const styles = StyleSheet.create({
   screenTitle: {
     fontSize: 24,
     fontWeight: "bold",
-    color: "#00B979",
+    color: "#097C54",
     marginTop: 60,
   },
   input: {
+    backgroundColor: "#DEDEDE",
+    color: "#46B19C",
+    width: 320,
+    padding: 10,
+    borderRadius: 5,
+    marginTop: 25,
+    paddingHorizontal: 20,
+  },
+  input_disable: {
     backgroundColor: "#B3EFDD",
     color: "#46B19C",
     width: 320,
@@ -179,7 +188,7 @@ const styles = StyleSheet.create({
   },
   prof_title: {
     fontSize: 16,
-    color: "#46B19C",
+    color: "#097C54",
     marginTop: 15,
     marginBottom: 10,
   },

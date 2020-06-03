@@ -5,10 +5,12 @@ import {
   View,
   ScrollView,
   TouchableOpacity,
+  AsyncStorage,
 } from "react-native";
 import Place from "../components/Place";
 import { useSelector, useDispatch } from "react-redux";
 import { getPlaces } from "../store/actions/actionHotPlace";
+import axios from "axios";
 
 export default function HotPlace({ navigation }) {
   const dispatch = useDispatch();
@@ -36,9 +38,39 @@ export default function HotPlace({ navigation }) {
   // ];
 
   function toQrHotplace(place) {
-    navigation.navigate("QR Hotplace", { place });
+    axios({
+      url: `http://localhost:3000/hotplace/${place.id}`,
+      method: "GET",
+      headers: { access_token },
+    })
+      .then((res) => {
+        navigation.navigate("QR Hotplace", { place: res.data });
+      })
+      .catch((err) => alert(err));
   }
 
+  // useEffect(() => {
+  //   AsyncStorage.getItem("access_token", (err, res) => {
+  //     if (res) {
+  //       set_access_token(res);
+  //       alert("dapet" + res);
+  //     }
+  //   });
+  //   axios({
+  //     method: "get",
+  //     url: "http/hotplace",
+  //     headers: { access_token: access_token },
+  //   })
+  //     .then((res) => {
+  //       // alert(res.data);
+  //       // console.log(res.data);
+  //       // setPlaces(res.data);
+  //       dispatch({ type: "GET_PLACES", payload: res.data });
+  //     })
+  //     .catch((err) => {
+  //       alert(err);
+  //     });
+  // }, []);
   function toAddPlace() {
     navigation.navigate("Add Hotplace");
   }
@@ -65,7 +97,7 @@ const styles = StyleSheet.create({
   screenTitle: {
     fontSize: 24,
     fontWeight: "bold",
-    color: "#00B979",
+    color: "#097C54",
     marginTop: 60,
   },
   btn: {

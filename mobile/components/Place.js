@@ -1,5 +1,12 @@
-import React from "react";
-import { StyleSheet, View, Text, TouchableOpacity } from "react-native";
+import React, { useState, useEffect } from "react";
+import {
+  StyleSheet,
+  View,
+  Text,
+  TouchableOpacity,
+  AsyncStorage,
+} from "react-native";
+import axios from "axios";
 
 export default function Place(props) {
   return (

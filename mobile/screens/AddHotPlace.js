@@ -8,6 +8,8 @@ import {
   ScrollView,
   KeyboardAvoidingView,
 } from "react-native";
+import axios from "axios";
+
 import { useSelector, useDispatch } from "react-redux";
 import { addDataHotPlace } from "../store/actions/actionHotPlace";
 
@@ -31,8 +33,32 @@ export default function Register({ navigation }) {
     } else if (address === "") {
       alert("Address Must Filled");
     } else {
-      const dataHotPlace = { name, type, phone, address };
-      dispatch(addDataHotPlace(access_token, dataHotPlace));
+      let text = `{\n\tname: ${name}, \n\taddress: ${address}, \n\ttype: ${type}, \n\tphone: ${phone} \n}`;
+      let encoded = encodeURI(text);
+      let barcode_url = `http://api.qrserver.com/v1/create-qr-code/?data=${encoded}&size=500x500`;
+
+      let data = {
+        name: name,
+        type: type,
+        address: address,
+        phone: phone,
+        barcode_url: barcode_url,
+      };
+      // alert(JSON.stringify(data));
+      axios({
+        method: "post",
+        url: "https://localhost:3000/hotplace",
+        data: data,
+      })
+        .then((res) => {
+          alert("Success\n" + JSON.stringify(res.data));
+          navigation.navigate("HotPlace");
+        })
+        .catch((err) => {
+          alert(err);
+        });
+      // const dataHotPlace = { name, type, phone, address, barcode_url };
+      dispatch(addDataHotPlace(access_token, data));
       navigation.navigate("HotPlace");
     }
   }

@@ -61,12 +61,8 @@ export function updateDataUser(updateData, token) {
       data: updateData,
     })
       .then((res) => {
-        // console.log(res.data);
-        getUser(token);
-      })
-      .then((res) => {
         console.log(res.data);
-        // dispatch({ type: "GET_USER", payload: res.data });
+        // getUser(token);
       })
       .catch((err) => {
         console.log(err);

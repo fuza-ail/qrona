@@ -1,20 +1,33 @@
-import React from "react";
+import React, { useEffect } from "react";
 import {
   StyleSheet,
   View,
   Text,
   ScrollView,
   TouchableOpacity,
+  Image,
 } from "react-native";
 
-export default function QrHotplace({ navigation, route }) {
+export default function QrHotplace({ route }) {
+  // useEffect(() => {
+  //   alert(JSON.stringify(route.params));
+  // }, []);
+  // const name = route.params.detail.name;
   const { place } = route.params;
   return (
     <View style={styles.container}>
       <ScrollView contentContainerStyle={{ alignItems: "center", width: 375 }}>
         <Text style={styles.screenTitle}>{place.name}</Text>
+        {/* <Text>{JSON.stringify(place)}</Text> */}
         <View style={styles.qr_box}>
-          <View style={styles.qr_code}></View>
+          <View style={styles.qr_code}>
+            <Image
+              style={{ width: 300, height: 300 }}
+              source={{
+                uri: place.barcode_url,
+              }}
+            />
+          </View>
           <Text style={styles.info}>
             Print and Put this QR on visible place
           </Text>
@@ -36,7 +49,7 @@ const styles = StyleSheet.create({
   screenTitle: {
     fontSize: 24,
     fontWeight: "bold",
-    color: "#00B979",
+    color: "#097C54",
     marginTop: 60,
   },
   qr_box: {

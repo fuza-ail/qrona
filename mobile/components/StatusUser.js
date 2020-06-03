@@ -35,7 +35,7 @@ const styles = StyleSheet.create({
   },
   stat_title: {
     fontSize: 16,
-    color: "#46B19C",
+    color: "#097C54",
     marginBottom: 10,
   },
   status: {
