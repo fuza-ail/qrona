@@ -56,7 +56,7 @@ export default function CheckIn() {
       },
     })
       .then((result) => {
-        alert("success checkin" + JSON.stringify(result.data));
+        alert("Check In Success");
       })
       .catch((err) => alert(err));
   };
@@ -76,14 +76,14 @@ export default function CheckIn() {
               onPress={() => setScanned(false)}
             />
           )}
-          <Text style={styles.info}>Scan Hot Place QR you Visit Here</Text>
+          <Text style={styles.info}>Scan QR Code untuk Check In</Text>
         </View>
       </ScrollView>
-      <TouchableOpacity style={styles.btn}>
+      {/* <TouchableOpacity style={styles.btn}>
         <Text style={styles.btn_text} onPress={showCamera}>
           Scan
         </Text>
-      </TouchableOpacity>
+      </TouchableOpacity> */}
     </View>
   );
 }
@@ -104,13 +104,13 @@ const styles = StyleSheet.create({
     backgroundColor: "#B3EFDD",
     alignItems: "center",
     width: 340,
-    height: 366,
+    height: 490,
     borderRadius: 5,
-    // marginVertical: 25,
+    marginTop: 15,
   },
   camera: {
-    // backgroundColor: "#fff",
-    width: 600,
+    flex: 1,
+    width: 310,
     height: 300,
     marginHorizontal: 10,
     marginTop: 15,

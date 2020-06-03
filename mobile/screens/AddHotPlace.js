@@ -8,7 +8,6 @@ import {
   ScrollView,
   KeyboardAvoidingView,
 } from "react-native";
-import axios from "axios";
 
 import { useSelector, useDispatch } from "react-redux";
 import { addDataHotPlace } from "../store/actions/actionHotPlace";
@@ -44,21 +43,7 @@ export default function Register({ navigation }) {
         phone: phone,
         barcode_url: barcode_url,
       };
-      // alert(JSON.stringify(data));
-      axios({
-        method: "post",
-        url: "https://vast-woodland-47918.herokuapp.com/hotplace",
-        data: data,
-        headers: { access_token },
-      })
-        .then((res) => {
-          alert("Success\n" + JSON.stringify(res.data));
-          navigation.navigate("HotPlace");
-        })
-        .catch((err) => {
-          alert(err);
-        });
-      // const dataHotPlace = { name, type, phone, address, barcode_url };
+
       dispatch(addDataHotPlace(access_token, data));
       navigation.navigate("HotPlace");
     }

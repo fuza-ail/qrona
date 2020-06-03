@@ -1,11 +1,5 @@
-import React, { useState, useEffect } from "react";
-import {
-  StyleSheet,
-  View,
-  Text,
-  TouchableOpacity,
-  AsyncStorage,
-} from "react-native";
+import React from "react";
+import { StyleSheet, View, Text, TouchableOpacity } from "react-native";
 
 export default function Place(props) {
   return (
@@ -13,6 +7,7 @@ export default function Place(props) {
       {props.places.map((place) => (
         <TouchableOpacity
           onPress={() => props.toQrHotplace(place)}
+          onLongPress={() => props.confirmDelete(place)}
           style={styles.place_box}
           key={place.id}
         >

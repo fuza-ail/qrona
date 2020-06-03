@@ -7,9 +7,10 @@ import {
   TouchableOpacity,
   AsyncStorage,
   Button,
+  Alert,
 } from "react-native";
-import { useSelector } from "react-redux";
 import { BarCodeScanner } from "expo-barcode-scanner";
+import { useSelector } from "react-redux";
 import axios from "axios";
 
 export default function CheckIn() {
@@ -19,21 +20,15 @@ export default function CheckIn() {
   const [BarcodeId, setBarcodeId] = useState(null);
   // const [access_token, set_access_token] = useState(null);
 
-  useEffect(() => {
-    AsyncStorage.getItem("access_token", (err, res) => {
-      if (res) {
-        set_access_token(res);
-        alert("dapet" + res);
-      }
-    });
-  }, []);
-
   const showCamera = () => {
     (async () => {
       const { status } = await BarCodeScanner.requestPermissionsAsync();
       setHasPermission(status === "granted");
     })();
   };
+  function showAlert() {
+    alert("kepincut doang");
+  }
   const handleBarCodeScanned = ({ type, data }) => {
     setScanned(true);
     sendCheckout(data);
@@ -43,43 +38,41 @@ export default function CheckIn() {
     return <Text>No access to camera</Text>;
   }
 
-  const sendCheckout = (QRdata) => {
+  const sendCheckout = (BarcodeId) => {
     axios({
       method: "PUT",
+      url: `https://vast-woodland-47918.herokuapp.com/checkout/${BarcodeId}`,
       headers: { access_token },
-      url: `https://vast-woodland-47918.herokuapp.com/checkout/${QRdata}`,
     })
       .then((result) => {
-        alert("success checkout" + JSON.stringify(result.data));
+        alert("Check Out Success");
       })
       .catch((err) => alert(err));
   };
+
   return (
     <View style={styles.container}>
       <ScrollView contentContainerStyle={{ alignItems: "center", width: 375 }}>
         <Text style={styles.screenTitle}>Check Out</Text>
         <View style={styles.checkin_box}>
-          <View style={styles.camera}>
-            <BarCodeScanner
-              onBarCodeScanned={scanned ? undefined : handleBarCodeScanned}
-              style={StyleSheet.absoluteFillObject}
-            />
+          <BarCodeScanner
+            onBarCodeScanned={scanned ? undefined : handleBarCodeScanned}
+            style={styles.camera}
+          />
 
-            {scanned && (
-              <Button
-                title={"Tap to Scan Again"}
-                onPress={() => setScanned(false)}
-              />
-            )}
-          </View>
-          <Text style={styles.info}>Scan Hot Place QR before you leave</Text>
+          {scanned && (
+            <Button
+              title={"Tap to Scan Again"}
+              onPress={() => setScanned(false)}
+            />
+          )}
+
+          <Text style={styles.info}>Scan QR Code untuk Check Out</Text>
         </View>
       </ScrollView>
-      <TouchableOpacity style={styles.btn}>
-        <Text style={styles.btn_text} onPress={showCamera}>
-          Scan
-        </Text>
-      </TouchableOpacity>
+      {/* <TouchableOpacity style={styles.btn} onPress={showAlert}>
+        <Text style={styles.btn_text}>Scan</Text>
+      </TouchableOpacity> */}
     </View>
   );
 }
@@ -100,12 +93,12 @@ const styles = StyleSheet.create({
     backgroundColor: "#B3EFDD",
     alignItems: "center",
     width: 340,
-    height: 366,
+    height: 490,
     borderRadius: 5,
-    marginVertical: 25,
+    marginTop: 15,
   },
   camera: {
-    backgroundColor: "#fff",
+    flex: 1,
     width: 310,
     height: 300,
     marginHorizontal: 10,

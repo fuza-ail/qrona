@@ -3,8 +3,10 @@ import {
   StyleSheet,
   Text,
   View,
+  Image,
   ScrollView,
   TouchableOpacity,
+  Alert,
 } from "react-native";
 import Place from "../components/Place";
 import { useSelector, useDispatch } from "react-redux";
@@ -16,9 +18,37 @@ export default function HotPlace({ navigation }) {
   const { access_token } = useSelector((state) => state.reducerUser);
   const { places } = useSelector((state) => state.reducerHotPlace);
 
+  const confirmDelete = (crowdPoint) =>
+    Alert.alert(
+      "Delete",
+      "delete this crowd point ?" + JSON.stringify(crowdPoint.id),
+      [
+        {
+          text: "Cancel",
+          onPress: () => {},
+          style: "cancel",
+        },
+        { text: "OK", onPress: () => deleteCrowdPoint(crowdPoint.id) },
+      ],
+      { cancelable: false }
+    );
+
   useEffect(() => {
     dispatch(getPlaces(access_token));
-  }, []);
+  }, [places]);
+
+  function deleteCrowdPoint(id) {
+    axios({
+      url: `https://vast-woodland-47918.herokuapp.com/hotplace/${id}`,
+      method: "DELETE",
+      headers: { access_token },
+    })
+      .then((res) => {
+        alert("Delete success");
+        dispatch(getPlaces(access_token));
+      })
+      .catch((err) => alert(err));
+  }
 
   function toQrHotplace(place) {
     axios({
@@ -36,11 +66,39 @@ export default function HotPlace({ navigation }) {
     navigation.navigate("Add Hotplace");
   }
 
+  if (places.length === 0) {
+    return (
+      <View style={styles.container}>
+        <ScrollView
+          contentContainerStyle={{ alignItems: "center", width: 375 }}
+        >
+          <Text style={styles.screenTitle}>My Crowd Point</Text>
+          <Image
+            source={require("../assets/pyramids.png")}
+            style={styles.logo}
+          />
+          <Text style={styles.prof_title}>Ooops, nampaknya masih kosong</Text>
+        </ScrollView>
+        <TouchableOpacity
+          onPress={toAddPlace}
+          style={styles.btn}
+          onLongPress={() => alert("button ketteahan")}
+        >
+          <Text style={styles.btn_text}>Add Crowd Point</Text>
+        </TouchableOpacity>
+      </View>
+    );
+  }
+
   return (
     <View style={styles.container}>
       <ScrollView contentContainerStyle={{ alignItems: "center", width: 375 }}>
         <Text style={styles.screenTitle}>My Crowd Point</Text>
-        <Place toQrHotplace={(place) => toQrHotplace(place)} places={places} />
+        <Place
+          toQrHotplace={(place) => toQrHotplace(place)}
+          confirmDelete={(place) => confirmDelete(place)}
+          places={places}
+        />
       </ScrollView>
       <TouchableOpacity
         onPress={toAddPlace}
@@ -64,6 +122,17 @@ const styles = StyleSheet.create({
     fontWeight: "bold",
     color: "#097C54",
     marginTop: 60,
+  },
+  logo: {
+    height: 200,
+    width: 200,
+    marginTop: 95,
+  },
+  prof_title: {
+    fontSize: 16,
+    color: "#097C54",
+    marginTop: 15,
+    marginTop: 40,
   },
   btn: {
     alignItems: "center",
