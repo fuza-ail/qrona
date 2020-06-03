@@ -13,7 +13,7 @@ module.exports = {
         status : 'negatif',
         phone: '0811111111',
         createdAt: new Date(),
-        updatedAt: new Date()
+        updatedAt: new Date(),
       },
       {
         no_ktp: '11112',

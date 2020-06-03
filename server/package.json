@@ -20,7 +20,7 @@
   "keywords": [],
   "author": "",
   "license": "ISC",
-  "description": "",
+  "description": "---",
   "dependencies": {
     "bcrypt": "^4.0.1",
     "bcryptjs": "^2.4.3",
@@ -37,5 +37,8 @@
   "devDependencies": {
     "jest": "^26.0.1",
     "supertest": "^4.0.2"
+  },
+  "directories": {
+    "test": "tests"
   }
 }
