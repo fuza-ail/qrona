@@ -10,7 +10,7 @@ routerUser.post('/hotplace',authentication,ControllerUser.addHotplace);
 routerUser.get('/hotplace', authentication,ControllerUser.getHotplace);
 routerUser.get('/hotplace/:id',authentication,ControllerUser.getBarcode);
 routerUser.delete('/hotplace/:id',authentication,ControllerUser.deleteHotplace);
-routerUser.get('/download/:id',authentication,ControllerUser.downloadBarcode);
+// routerUser.get('/download/:id',authentication,ControllerUser.downloadBarcode);
 routerUser.post('/checkin',authentication,ControllerUser.checkIn)
 routerUser.put('/checkout/:id',authentication,ControllerUser.checkOut)
 

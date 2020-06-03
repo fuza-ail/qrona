@@ -196,26 +196,26 @@ class ControllerUser {
       .catch(error => next(error))
   }
 
-  static downloadBarcode(req, res, next) {
-    const hotplaceId = req.params.id
-    Hotplace.findOne({
-      where: {
-        id: hotplaceId
-      }
-    })
-      .then(hotplace => {
-        console.log(hotplace)
-        return Barcode.findOne({
-          where: {
-            HotplaceId: hotplaceId
-          }
-        })
-      })
-      .then(barcode => {
-        res.status(200).json(barcode)
-      })
-      .catch(error => next(error))
-  }
+  // static downloadBarcode(req, res, next) {
+  //   const hotplaceId = req.params.id
+  //   Hotplace.findOne({
+  //     where: {
+  //       id: hotplaceId
+  //     }
+  //   })
+  //     .then(hotplace => {
+  //       console.log(hotplace)
+  //       return Barcode.findOne({
+  //         where: {
+  //           HotplaceId: hotplaceId
+  //         }
+  //       })
+  //     })
+  //     .then(barcode => {
+  //       res.status(200).json(barcode)
+  //     })
+  //     .catch(error => next(error))
+  // }
 
   static checkIn(req, res, next) {
     const barcodeId = req.body.id
