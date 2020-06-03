@@ -11,7 +11,7 @@ export default function Place(props) {
           key={place.id}
         >
           <Text style={styles.box_title}>{place.name}</Text>
-          <Text style={styles.box_desc}>{place.adress}</Text>
+          <Text style={styles.box_desc}>{place.address}</Text>
         </TouchableOpacity>
       ))}
     </View>

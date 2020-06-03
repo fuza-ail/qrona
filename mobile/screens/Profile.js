@@ -8,16 +8,16 @@ import {
   ScrollView,
 } from "react-native";
 import StatusUSer from "../components/StatusUser";
+import { useSelector, useDispatch } from "react-redux";
+import { getUser, updateDataUser } from "../store/actions/actionUser";
 
 export default function Profile(props) {
-  const user = {
-    name: "Hamzah Abdullah Mubarak",
-    no_ktp: "1234567890123456",
-    phone: "123456789012",
-    adress: "5, 48 Pirrama Rd, Pyrmont NSW 2009, AUS",
-    email: "hamzah@mail.com",
-    status: "OTG",
-  };
+  const { access_token, user } = useSelector((state) => state.reducerUser);
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch(getUser(access_token));
+  }, []);
 
   let colorCode;
   let status;
@@ -39,7 +39,7 @@ export default function Profile(props) {
   const [name, setName] = useState(user.name);
   const [no_ktp, setNo_ktp] = useState(user.no_ktp);
   const [phone, setPhone] = useState(user.phone);
-  const [adress, setAdress] = useState(user.adress);
+  const [address, setAddress] = useState(user.address);
   const [email, setEmail] = useState(user.email);
 
   function toUpdate() {
@@ -52,7 +52,19 @@ export default function Profile(props) {
 
   function updateUser() {
     // DISPATCH TO UPDATE
-    setIsUpdate(false);
+    if (name === "") {
+      alert("Name Must Filled");
+    } else if (phone === "") {
+      alert("Phone Must Filled");
+    } else if (address === "") {
+      alert("Address Must Filled");
+    } else {
+      const updateData = { name, phone, address };
+      dispatch(updateDataUser(updateData, access_token));
+      // REFETCH
+      // dispatch(getUser(access_token));
+      setIsUpdate(false);
+    }
   }
 
   if (isUpdate) {
@@ -96,9 +108,9 @@ export default function Profile(props) {
           />
           <TextInput
             style={styles.input}
-            onChangeText={(text) => setAdress(text)}
-            value={adress}
-            placeholder="Enter Adress"
+            onChangeText={(text) => setAddress(text)}
+            value={address}
+            placeholder="Enter Address"
             placeholderTextColor="#46B19C"
             autoCorrect={false}
           />
@@ -132,9 +144,9 @@ export default function Profile(props) {
         <View style={styles.prof_box}>
           <Text style={styles.prof_value}>{user.phone}</Text>
         </View>
-        <Text style={styles.prof_title}>Adress</Text>
+        <Text style={styles.prof_title}>Address</Text>
         <View style={styles.prof_box}>
-          <Text style={styles.prof_value}>{user.adress}</Text>
+          <Text style={styles.prof_value}>{user.address}</Text>
         </View>
       </ScrollView>
       <TouchableOpacity onPress={toUpdate} style={styles.btn}>

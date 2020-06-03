@@ -8,8 +8,13 @@ import {
   ScrollView,
   KeyboardAvoidingView,
 } from "react-native";
+import { useSelector, useDispatch } from "react-redux";
+import { addDataHotPlace } from "../store/actions/actionHotPlace";
 
 export default function Register({ navigation }) {
+  const { access_token } = useSelector((state) => state.reducerUser);
+  const dispatch = useDispatch();
+
   const [name, setName] = useState("");
   const [type, setType] = useState("");
   const [phone, setPhone] = useState("");
@@ -17,7 +22,19 @@ export default function Register({ navigation }) {
 
   function addHotPlace() {
     // DISPATCH TO ADD HOTPLACE
-    navigation.navigate("HotPlace");
+    if (name === "") {
+      alert("Name Must Filled");
+    } else if (type === "") {
+      alert("Type Must Filled");
+    } else if (phone === "") {
+      alert("Type Must Filled");
+    } else if (address === "") {
+      alert("Address Must Filled");
+    } else {
+      const dataHotPlace = { name, type, phone, address };
+      dispatch(addDataHotPlace(access_token, dataHotPlace));
+      navigation.navigate("HotPlace");
+    }
   }
 
   return (

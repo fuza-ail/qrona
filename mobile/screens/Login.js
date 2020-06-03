@@ -26,6 +26,8 @@ export default function Login({ navigation }) {
     } else {
       const loginData = { email, password };
       dispatch(login(loginData));
+      setEmail("");
+      setPassword("");
       navigation.navigate("TabScreen");
     }
   }

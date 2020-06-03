@@ -1,10 +1,10 @@
 const initialValue = {
-  access_token: "",
+  access_token: "token",
   user: {},
 };
 
 function reducerUser(state = initialValue, action) {
-  switch (action.value) {
+  switch (action.type) {
     case "SET_TOKEN":
       return { ...state, access_token: action.payload };
     case "GET_USER":
