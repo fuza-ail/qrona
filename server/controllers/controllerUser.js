@@ -14,7 +14,8 @@ class ControllerUser {
       email: inputData.email,
       address: inputData.address,
       phone: inputData.phone,
-      password: inputData.password
+      password: inputData.password,
+      notification_token: inputData.notificationToken
     })
       .then(user => {
         let token = jwt.sign({

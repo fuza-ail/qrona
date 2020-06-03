@@ -37,7 +37,7 @@ module.exports = {
       },
       {
         checkin: new Date('2020-06-02 07:00:00.811333+07'),
-        checkout: new Date('2020-06-02 08:00:00.811333+07'),
+        checkout: new Date('2020-06-02 08:30:00.811333+07'),
         BarcodeId: 2,
         UserId: 1,
         createdAt: new Date(),
