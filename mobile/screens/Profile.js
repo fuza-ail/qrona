@@ -12,11 +12,20 @@ import { useSelector, useDispatch } from "react-redux";
 import { getUser, updateDataUser } from "../store/actions/actionUser";
 
 export default function Profile(props) {
-  const { access_token, user } = useSelector((state) => state.reducerUser);
+  const { access_token } = useSelector((state) => state.reducerUser);
+  const fetchUser = useSelector((state) => state.reducerUser.user);
   const dispatch = useDispatch();
+  const [user, setUser] = useState(fetchUser);
+  const [isUpdate, setIsUpdate] = useState(false);
+  const [name, setName] = useState(user.name);
+  const [no_ktp, setNo_ktp] = useState(user.no_ktp);
+  const [phone, setPhone] = useState(user.phone);
+  const [address, setAddress] = useState(user.address);
+  const [email, setEmail] = useState(user.email);
 
   useEffect(() => {
     dispatch(getUser(access_token));
+    setUser(fetchUser);
   }, []);
 
   let colorCode;
@@ -34,13 +43,6 @@ export default function Profile(props) {
     colorCode = "#46B19C";
     status = "Negatif";
   }
-
-  const [isUpdate, setIsUpdate] = useState(false);
-  const [name, setName] = useState(user.name);
-  const [no_ktp, setNo_ktp] = useState(user.no_ktp);
-  const [phone, setPhone] = useState(user.phone);
-  const [address, setAddress] = useState(user.address);
-  const [email, setEmail] = useState(user.email);
 
   function toUpdate() {
     setIsUpdate(true);
@@ -62,7 +64,8 @@ export default function Profile(props) {
       const updateData = { name, phone, address };
       dispatch(updateDataUser(updateData, access_token));
       // REFETCH
-      // dispatch(getUser(access_token));
+      setUser({ ...user, ...updateData });
+      dispatch(getUser(access_token));
       setIsUpdate(false);
     }
   }
@@ -74,6 +77,10 @@ export default function Profile(props) {
           contentContainerStyle={{ alignItems: "center", width: 375 }}
         >
           <Text style={styles.screenTitle}>Update Profile</Text>
+          <Text>{JSON.stringify(user)}</Text>
+          <Text>{status} ini status </Text>
+
+          <Text>{JSON.stringify(fetchUser)}</Text>
           <TextInput
             style={styles.input}
             onChangeText={(text) => setNo_ktp(text)}
@@ -129,6 +136,9 @@ export default function Profile(props) {
     <View style={styles.container}>
       <ScrollView contentContainerStyle={{ alignItems: "center", width: 375 }}>
         <Text style={styles.screenTitle}>{user.name}</Text>
+        <Text>{JSON.stringify(user)}</Text>
+        <Text>{status} ini status</Text>
+        <Text>{JSON.stringify(fetchUser)}</Text>
         <View style={styles.status}>
           <StatusUSer status={status} colorCode={colorCode} />
         </View>

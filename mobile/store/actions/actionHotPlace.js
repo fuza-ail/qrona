@@ -1,5 +1,5 @@
 import axios from "axios";
-const mainUrl = "http://localhost:3000";
+const mainUrl = "https://vast-woodland-47918.herokuapp.com";
 
 export function getPlaces(token) {
   return (dispatch, setState) => {
