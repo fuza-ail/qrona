@@ -1,70 +1,79 @@
 import React, { useState, useEffect } from "react";
 import {
-  StyleSheet,
-  Text,
-  View,
-  ScrollView,
-  TouchableOpacity,
+	StyleSheet,
+	Text,
+	View,
+	ScrollView,
+	TouchableOpacity,
+	AsyncStorage
 } from "react-native";
 import Place from "../components/Place";
+import axios from "axios";
 
 export default function HotPlace({ navigation }) {
-  const places = [
-    {
-      id: 1,
-      name: "Mini Market Asyik",
-      adress: "5, 48 Pirrama Rd, Pyrmont NSW 2009, Australia",
-      // linkQR: "abcdef",
-      // imgUrl: "abcdef",
-    },
-    {
-      id: 2,
-      name: "Warung Makan Sihuy",
-      adress: "5, 48 Pirrama Rd, Pyrmont NSW 2009, Australia",
-      // imgUrl: "abcdef",
-      // linkQR: "abcdef",
-    },
-  ];
+	const [places, setPlaces] = useState([]);
+	const [access_token, set_access_token] = useState(null);
 
-  function toAddPlace() {
-    navigation.navigate("Add Hotplace");
-  }
+	useEffect(() => {
+		AsyncStorage.getItem("access_token", (err, res) => {
+			if (res) {
+				set_access_token(res);
+				alert("dapet" + res);
+			}
+		});
+		axios({
+			method: "get",
+			url: "https://thawing-plains-96418.herokuapp.com/hotplace",
+			headers: { access_token: access_token }
+		})
+			.then(res => {
+				alert(res.data);
+				console.log(res.data);
+				setPlaces(res.data);
+			})
+			.catch(err => {
+				alert(err);
+			});
+	}, []);
+	function toAddPlace() {
+		navigation.navigate("Add Hotplace");
+	}
 
-  return (
-    <View style={styles.container}>
-      <ScrollView contentContainerStyle={{ alignItems: "center", width: 375 }}>
-        <Text style={styles.screenTitle}>My Hot Place</Text>
-        <Place places={places} />
-      </ScrollView>
-      <TouchableOpacity onPress={toAddPlace} style={styles.btn}>
-        <Text style={styles.btn_text}>Add Hot Place</Text>
-      </TouchableOpacity>
-    </View>
-  );
+	return (
+		<View style={styles.container}>
+			<ScrollView contentContainerStyle={{ alignItems: "center", width: 375 }}>
+				<Text style={styles.screenTitle}>My Hot Place</Text>
+				<Place places={places} navigation={navigation} />
+			</ScrollView>
+			<TouchableOpacity onPress={toAddPlace} style={styles.btn}>
+				<Text style={styles.btn_text}>Add Hot Place</Text>
+			</TouchableOpacity>
+		</View>
+	);
 }
 
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    alignItems: "center",
-    backgroundColor: "#65DCB8",
-  },
-  screenTitle: {
-    fontSize: 24,
-    fontWeight: "bold",
-    color: "#00B979",
-    marginTop: 60,
-  },
-  btn: {
-    alignItems: "center",
-    width: 320,
-    padding: 10,
-    marginBottom: 25,
-    marginTop: 15,
-    borderRadius: 5,
-    backgroundColor: "#00B979",
-  },
-  btn_text: {
-    color: "#B3EFDD",
-  },
+	container: {
+		flex: 1,
+		alignItems: "center",
+		backgroundColor: "#65DCB8"
+	},
+	screenTitle: {
+		fontSize: 24,
+		fontWeight: "bold",
+		color: "#00B979",
+		marginTop: 60
+	},
+	btn: {
+		alignItems: "center",
+		width: 320,
+		padding: 10,
+		marginBottom: 25,
+		marginTop: 15,
+		borderRadius: 5,
+		backgroundColor: "#00B979"
+	},
+	btn_text: {
+		color: "#B3EFDD"
+	}
 });
