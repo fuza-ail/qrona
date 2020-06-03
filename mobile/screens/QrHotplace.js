@@ -22,7 +22,7 @@ export default function QrHotplace({ route }) {
         <View style={styles.qr_box}>
           <View style={styles.qr_code}>
             <Image
-              style={{ width: 300, height: 300 }}
+              style={{ width: 310, height: 310 }}
               source={{
                 uri: place.barcode_url,
               }}

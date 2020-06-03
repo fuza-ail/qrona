@@ -8,7 +8,7 @@ import {
   ScrollView,
   KeyboardAvoidingView,
 } from "react-native";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { register } from "../store/actions/actionUser";
 
 export default function Register({ navigation }) {
@@ -19,9 +19,12 @@ export default function Register({ navigation }) {
   const [phone, setPhone] = useState("");
   const [address, setAddress] = useState("");
   const [password, setPassword] = useState("");
+  const { notificationToken } = useSelector((state) => state.reducerUser);
 
   function registerUser() {
     // DISPATCH TO REGISTER
+    // let notificationToken = await Notifications.getExpoPushTokenAsync();
+    // console.log(notificationToken, "<<< DARI REGISTER");
     if (no_ktp === "") {
       alert("KTP Number Must Filled");
     } else if (email === "") {
@@ -35,7 +38,15 @@ export default function Register({ navigation }) {
     } else if (password === "") {
       alert("Password Must Filled");
     } else {
-      const registerData = { no_ktp, email, name, phone, address, password };
+      const registerData = {
+        no_ktp,
+        email,
+        name,
+        phone,
+        address,
+        password,
+        // notificationToken,
+      };
       dispatch(register(registerData));
       navigation.navigate("TabScreen");
     }

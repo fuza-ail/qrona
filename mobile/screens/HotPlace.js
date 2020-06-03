@@ -39,7 +39,7 @@ export default function HotPlace({ navigation }) {
 
   function toQrHotplace(place) {
     axios({
-      url: `http://localhost:3000/hotplace/${place.id}`,
+      url: `http://192.168.0.103:3000/hotplace/${place.id}`,
       method: "GET",
       headers: { access_token },
     })

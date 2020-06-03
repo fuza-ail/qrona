@@ -3,6 +3,7 @@ import {
   StyleSheet,
   Text,
   View,
+  Image,
   ScrollView,
   TouchableOpacity,
 } from "react-native";
@@ -95,26 +96,44 @@ export default function Home({ navigation }) {
           description={description}
         />
         <TouchableOpacity onPress={toCheckIn} style={styles.menu_box}>
-          <Text style={styles.box_title}>Check In</Text>
-          <Text style={styles.box_desc}>
-            Lakukan Check in setiap kali anda memasuki Crowd Point
-          </Text>
+          <View style={styles.info}>
+            <Text style={styles.box_title}>Check In</Text>
+            <Text style={styles.box_desc}>
+              Lakukan Check in setiap kali anda memasuki Crowd Point
+            </Text>
+          </View>
+          <Image
+            source={require("../assets/face-scan.png")}
+            style={styles.logo}
+          />
         </TouchableOpacity>
         <TouchableOpacity onPress={toCheckOut} style={styles.menu_box}>
-          <Text style={styles.box_title}>Check Out</Text>
-          <Text style={styles.box_desc}>
-            Lakukan Check Out setiap kali anda keluar dari Crowd Point
-          </Text>
+          <View style={styles.info}>
+            <Text style={styles.box_title}>Check Out</Text>
+            <Text style={styles.box_desc}>
+              Lakukan Check Out setiap kali anda keluar dari Crowd Point
+            </Text>
+          </View>
+          <Image source={require("../assets/login.png")} style={styles.logo} />
         </TouchableOpacity>
         <TouchableOpacity onPress={toAddHotplace} style={styles.menu_box}>
-          <Text style={styles.box_title}>Registrasi Business</Text>
-          <Text style={styles.box_desc}>
-            Daftarkan Bisnismu sebagai Crowd Point
-          </Text>
+          <View style={styles.info}>
+            <Text style={styles.box_title}>Registrasi Business</Text>
+            <Text style={styles.box_desc}>
+              Daftarkan Bisnismu sebagai Crowd Point
+            </Text>
+          </View>
+          <Image
+            source={require("../assets/pharmacy.png")}
+            style={styles.logo}
+          />
         </TouchableOpacity>
         <TouchableOpacity onPress={toProtocol} style={styles.menu_box}>
-          <Text style={styles.box_title}>Protokol COVID-19</Text>
-          <Text style={styles.box_desc}>Baca Informasi terkait Covid-19</Text>
+          <View style={styles.info}>
+            <Text style={styles.box_title}>Protokol COVID-19</Text>
+            <Text style={styles.box_desc}>Baca Informasi terkait Covid-19</Text>
+          </View>
+          <Image source={require("../assets/shield.png")} style={styles.logo} />
         </TouchableOpacity>
       </ScrollView>
     </View>
@@ -129,9 +148,14 @@ const styles = StyleSheet.create({
   },
   menu_box: {
     backgroundColor: "#B3EFDD",
+    display: "flex",
+    flexDirection: "row",
     width: 320,
     borderRadius: 5,
     marginTop: 25,
+  },
+  info: {
+    width: 240,
   },
   box_title: {
     marginTop: 13,
@@ -145,5 +169,12 @@ const styles = StyleSheet.create({
     marginHorizontal: 24,
     marginBottom: 13,
     color: "#566573",
+  },
+  logo: {
+    height: 55,
+    width: 55,
+    display: "flex",
+    flexDirection: "column",
+    alignSelf: "center",
   },
 });

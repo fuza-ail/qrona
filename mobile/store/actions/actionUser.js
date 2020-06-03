@@ -1,5 +1,5 @@
 import axios from "axios";
-const mainUrl = "http://localhost:3000";
+const mainUrl = "http://192.168.0.103:3000";
 
 export function login(userData) {
   return (dispatch, setState) => {
@@ -9,7 +9,6 @@ export function login(userData) {
       data: userData,
     })
       .then((res) => {
-        // console.log(res.data.access_token, "<<< ACTION");
         dispatch({ type: "SET_TOKEN", payload: res.data.access_token });
       })
       .catch((err) => {
@@ -62,7 +61,7 @@ export function updateDataUser(updateData, token) {
     })
       .then((res) => {
         console.log(res.data);
-        // getUser(token);
+        // dispatch({ type: "PUT_USER", payload: updateData });
       })
       .catch((err) => {
         console.log(err);
