@@ -7,6 +7,7 @@ import {
 	TouchableOpacity,
 	Image
 } from "react-native";
+import { QRCode } from "react-native-custom-qr-codes";
 
 export default function QrHotplace({ route }) {
 	useEffect(() => {
@@ -19,11 +20,19 @@ export default function QrHotplace({ route }) {
 				<Text style={styles.screenTitle}>{name}</Text>
 				<View style={styles.qr_box}>
 					<View style={styles.qr_code}>
-						<Image
+						{/* <Image
 							style={{ width: 300, height: 300 }}
 							source={{
 								uri: route.params.detail.barcode_url
 							}}
+						/> */}
+						<QRCode
+							content={route.params.detail.id + ""}
+							codeStyle="circle"
+							outerEyeStyle="square"
+							innerEyeStyle="diamond"
+							logoSize="25"
+							logo={require("../assets/qricon.png")}
 						/>
 					</View>
 					<Text style={styles.info}>
