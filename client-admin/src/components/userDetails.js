@@ -6,6 +6,7 @@ import url from '../url'
 import moment from 'moment'
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import spin from '../loading.svg'
 
 
 //for template
@@ -22,6 +23,7 @@ function UserDetail() {
     let { userId } = useParams()
 
     moment.locale('en-sg')
+
 
     useEffect(() => {
         setLoading(true)
@@ -57,7 +59,9 @@ function UserDetail() {
     }
 
     if (loading) {
-        return <h1>Loading..</h1>
+        // return <h1>Loading..</h1>
+
+        return <div><img src={spin} alt='Loading Spinner'></img></div>
     }
 
 
@@ -98,20 +102,26 @@ function UserDetail() {
                 </thead>
                 <tbody style={{ color: '#46B19C' }}>
                     {data.UserBarcodes.map(barcode => {
-                        return <tr key={barcode.checkin} >
-                            <td style={{ verticalAlign: 'middle' }}>  <img src={logo} alt="QR Code, barcode.Barcode.barcode_url" width="50" height="50" onClick={() => setShowModal({ show: true, url: logo })} style={{ cursor: 'pointer' }}></img></td>
-                            <td style={{ verticalAlign: 'middle' }}>  <Link to={'/locations/' + barcode.Barcode.Hotplace.id} style={{ color: '#46B19C', fontWeight: 'bold' }}>{barcode.Barcode.Hotplace.name}</Link> </td>
-                            <td style={{ verticalAlign: 'middle' }}> {barcode.Barcode.Hotplace.type} </td>
-                            <td style={{ verticalAlign: 'middle' }}> {moment(barcode.checkin).format('MMMM Do YYYY, h:mm:ss a')} </td>
-                            <td style={{ verticalAlign: 'middle' }}> {moment(barcode.checkout).format('MMMM Do YYYY, h:mm:ss a')} </td>
-                        </tr>
+                        if (barcode.Barcode) {
+                            return <tr key={barcode.checkin} >
+                                <td style={{ verticalAlign: 'middle' }}>
+                                    <img src={barcode.Barcode.barcode_url !== 'google.com' && barcode.Barcode.barcode_url ? barcode.Barcode.barcode_url : logo} alt="QR Code" width="50" height="50"
+                                        onClick={() => setShowModal({ show: true, url: barcode.Barcode.barcode_url !== 'google.com' && barcode.Barcode.barcode_url ? barcode.Barcode.barcode_url : logo })}
+                                        style={{ cursor: 'pointer' }}></img>
+                                </td>
+                                <td style={{ verticalAlign: 'middle' }}>  <Link to={'/locations/' + barcode.Barcode.Hotplace.id} style={{ color: '#46B19C', fontWeight: 'bold' }}>{barcode.Barcode.Hotplace.name}</Link> </td>
+                                <td style={{ verticalAlign: 'middle' }}> {barcode.Barcode.Hotplace.type} </td>
+                                <td style={{ verticalAlign: 'middle' }}> {moment(barcode.checkin).format('MMMM Do YYYY, h:mm:ss a')} </td>
+                                <td style={{ verticalAlign: 'middle' }}> {moment(barcode.checkout).format('MMMM Do YYYY, h:mm:ss a')} </td>
+                            </tr>
+                        }
                     })}
                 </tbody>
             </Table>
         </div>
 
         <Modal show={showModal.show} onHide={() => setShowModal({ show: false, url: '' })} >
-            <img src={showModal.url} alt="QR Code, barcode.Barcode.barcode_url" width="500" height="500"></img>
+            <img src={showModal.url} alt="QR Code" width="500" height="500"></img>
         </Modal>
 
         <ToastContainer
