@@ -49,7 +49,7 @@ export default function Map() {
     }
     Alert.alert(`kecamatan: ${name}\nstatus: ${status}\nkasus: ${cases}`);
   }
-
+  //
   return (
     <>
       <View style={styles.container}>
