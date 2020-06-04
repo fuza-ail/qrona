@@ -1,5 +1,12 @@
 import React, { useEffect, useState } from "react";
-import { StyleSheet, Button, View, Text, ScrollView } from "react-native";
+import {
+  StyleSheet,
+  Button,
+  View,
+  Text,
+  ScrollView,
+  Alert,
+} from "react-native";
 import MapView, { PROVIDER_GOOGLE } from "react-native-maps";
 import polygonData from "../assets/polygondata/polygonData";
 
@@ -40,7 +47,7 @@ export default function Map() {
     } else {
       status = "Aman";
     }
-    alert(`kecamatan: ${name}\nstatus: ${status}\nkasus: ${cases}`);
+    Alert.alert(`kecamatan: ${name}\nstatus: ${status}\nkasus: ${cases}`);
   }
 
   return (
